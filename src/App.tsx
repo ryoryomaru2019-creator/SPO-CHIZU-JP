@@ -647,7 +647,7 @@ export const App: React.FC = () => {
                   className={`game-layout geoguessr-theme ${!isSidebarOpen ? 'sidebar-collapsed' : ''} ${!isHudBarOpen ? 'hud-collapsed' : ''}`}
                   style={{
                     flex: '1 1 0%',
-                    height: isHudBarOpen ? 'calc(100% - 44px)' : 'calc(100% - 24px)',
+                    height: isHudBarOpen ? 'calc(100% - 54px)' : 'calc(100% - 24px)',
                     minHeight: 0,
                     position: 'relative',
                   }}
@@ -717,7 +717,7 @@ export const App: React.FC = () => {
                   className={`game-layout result-layout geoguessr-theme ${!isSidebarOpen ? 'sidebar-collapsed' : ''} ${!isHudBarOpen ? 'hud-collapsed' : ''}`}
                   style={{
                     flex: '1 1 0%',
-                    height: isHudBarOpen ? 'calc(100% - 44px)' : 'calc(100% - 24px)',
+                    height: isHudBarOpen ? 'calc(100% - 54px)' : 'calc(100% - 24px)',
                     minHeight: 0,
                     position: 'relative',
                   }}
