@@ -3,12 +3,14 @@ import { RoundResult } from '../types/game';
 import { formatDistance } from '../utils/distance';
 import { formatTimeDisplay } from '../utils/time';
 import { GoogleMapsLinks } from './GoogleMapsLinks';
+import { ReportQuestionModal } from './ReportQuestionModal';
 import {
   submitScore,
   getLastPlayerName,
   fetchRankings,
   RankingEntry,
   getRankingApiUrl,
+  getPlayerUniqueId,
 } from '../services/rankingService';
 
 interface FinalResultProps {
@@ -36,11 +38,36 @@ export const FinalResult: React.FC<FinalResultProps> = ({
 
   // ランキング登録ステート
   const [playerName, setPlayerName] = useState<string>(() => getLastPlayerName());
+  const [playerUniqueId] = useState<string>(() => getPlayerUniqueId());
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [submitMessage, setSubmitMessage] = useState<{ text: string; isError?: boolean } | null>(null);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [topRankings, setTopRankings] = useState<RankingEntry[]>([]);
   const [isOnline, setIsOnline] = useState<boolean>(false);
+
+  // 問題ごとの結果カード 折り畳み管理 (初期は全折り畳み、または1問目だけ展開)
+  const [expandedIndices, setExpandedIndices] = useState<Set<number>>(new Set([0]));
+  const [reportingResult, setReportingResult] = useState<RoundResult | null>(null);
+
+  const toggleExpand = (index: number) => {
+    setExpandedIndices((prev) => {
+      const next = new Set(prev);
+      if (next.has(index)) {
+        next.delete(index);
+      } else {
+        next.add(index);
+      }
+      return next;
+    });
+  };
+
+  const toggleAllExpand = () => {
+    if (expandedIndices.size === roundResults.length) {
+      setExpandedIndices(new Set());
+    } else {
+      setExpandedIndices(new Set(roundResults.map((_, i) => i)));
+    }
+  };
 
   const hasApiConfigured = Boolean(getRankingApiUrl());
 
@@ -66,6 +93,7 @@ export const FinalResult: React.FC<FinalResultProps> = ({
         totalDistanceKm: avgKm,
         avgTimeFormatted: formatTimeDisplay(totalElapsedMs),
         questionCount: roundResults.length,
+        playerId: playerUniqueId,
         mode: 'standard',
         categoryName: 'Jリーグ会場',
       });
@@ -122,7 +150,7 @@ export const FinalResult: React.FC<FinalResultProps> = ({
           <div className="ranking-submit-card">
             <div className="submit-card-header">
               <span className="ranking-icon" aria-hidden="true">☁️ 🏆</span>
-              <div>
+              <div className="submit-card-titles">
                 <h3 className="submit-card-title">世界ランキングにスコアを登録</h3>
                 <p className="submit-card-subtitle">
                   {isOnline
@@ -131,6 +159,11 @@ export const FinalResult: React.FC<FinalResultProps> = ({
                     ? 'オンライン通信を試行中...'
                     : 'ニックネームを入力してランキングに登録できます（管理画面でGAS URLを設定可能）'}
                 </p>
+              </div>
+              <div className="player-id-cyber-badge" title="あなたのアカウント固有IDです（ブラウザに自動保存）">
+                <span className="id-icon">👤</span>
+                <span className="id-label">プレイヤーID:</span>
+                <strong className="id-code">{playerUniqueId}</strong>
               </div>
             </div>
 
@@ -186,44 +219,99 @@ export const FinalResult: React.FC<FinalResultProps> = ({
           </div>
         </section>
 
-        {/* 問題ごとの結果一覧 */}
+        {/* 問題ごとの結果一覧 (折り畳み式カード型) */}
         <section className="results-list-section">
-          <h2>問題ごとの結果一覧</h2>
-          <div className="results-list">
-            {roundResults.map((result, index) => (
-              <div key={result.questionId} className="result-item-card geoguessr-result-item">
-                <div className="item-summary">
-                  <div className="item-title-group">
-                    <span className="item-num">第 {index + 1} 問</span>
-                    <h3 className="item-name">{result.stadiumName}</h3>
-                  </div>
-                  <div className="item-scores">
-                    <span className="item-distance">
-                      誤差: <strong>{formatDistance(result.distanceKm)}</strong>
-                    </span>
-                    {typeof result.elapsedMs === 'number' && (
-                      <span className="item-time">
-                        時間: <strong>{formatTimeDisplay(result.elapsedMs)}</strong>
-                      </span>
-                    )}
-                    <span className="item-score">
-                      <strong>{result.score}</strong> 点
-                      {result.timeBonus ? (
-                        <small className="bonus-sub"> (速答+{result.timeBonus})</small>
-                      ) : null}
-                    </span>
-                  </div>
-                </div>
+          <div className="results-section-header">
+            <h2>問題ごとの結果一覧</h2>
+            <button
+              type="button"
+              className="toggle-all-results-btn"
+              onClick={toggleAllExpand}
+            >
+              {expandedIndices.size === roundResults.length
+                ? '▲ すべて折り畳む'
+                : '▼ すべて展開'}
+            </button>
+          </div>
 
-                <div className="item-maps-wrapper">
-                  <GoogleMapsLinks
-                    userCoordinates={result.userCoordinates}
-                    correctCoordinates={result.correctCoordinates}
-                    stadiumName={result.stadiumName}
-                  />
+          <div className="results-list">
+            {roundResults.map((result, index) => {
+              const isExpanded = expandedIndices.has(index);
+
+              return (
+                <div
+                  key={result.questionId || index}
+                  className={`result-item-card geoguessr-result-item ${
+                    isExpanded ? 'is-expanded' : 'is-collapsed'
+                  }`}
+                >
+                  {/* カードヘッダー (クリックで折り畳み切り替え) */}
+                  <div
+                    className="item-summary accordion-trigger"
+                    onClick={() => toggleExpand(index)}
+                    role="button"
+                    tabIndex={0}
+                    aria-expanded={isExpanded}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleExpand(index);
+                      }
+                    }}
+                  >
+                    <div className="item-title-group">
+                      <span className="item-num">第 {index + 1} 問</span>
+                      <h3 className="item-name">{result.stadiumName}</h3>
+                    </div>
+
+                    <div className="item-scores">
+                      <span className="item-distance">
+                        誤差: <strong>{formatDistance(result.distanceKm)}</strong>
+                      </span>
+                      {typeof result.elapsedMs === 'number' && (
+                        <span className="item-time">
+                          時間: <strong>{formatTimeDisplay(result.elapsedMs)}</strong>
+                        </span>
+                      )}
+                      <span className="item-score">
+                        <strong>{result.score}</strong> 点
+                        {result.timeBonus ? (
+                          <small className="bonus-sub"> (速答+{result.timeBonus})</small>
+                        ) : null}
+                      </span>
+                      <span className="accordion-chevron" aria-hidden="true">
+                        {isExpanded ? '▲' : '▼'}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* 展開される詳細ボディ */}
+                  {isExpanded && (
+                    <div className="item-details-body">
+                      <div className="item-maps-wrapper">
+                        <GoogleMapsLinks
+                          userCoordinates={result.userCoordinates}
+                          correctCoordinates={result.correctCoordinates}
+                          stadiumName={result.stadiumName}
+                        />
+                      </div>
+
+                      {/* 問題修正報告ボタン */}
+                      <div className="item-report-action-row">
+                        <button
+                          type="button"
+                          className="report-problem-btn"
+                          onClick={() => setReportingResult(result)}
+                          title="この問題の正解座標や名称の誤りを報告・修正提案します"
+                        >
+                          ⚠️ この問題を報告（座標・名称の修正提案）
+                        </button>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </section>
 
@@ -246,6 +334,19 @@ export const FinalResult: React.FC<FinalResultProps> = ({
           </button>
         </footer>
       </div>
+
+      {/* 問題修正報告モーダル */}
+      {reportingResult && (
+        <ReportQuestionModal
+          isOpen={Boolean(reportingResult)}
+          onClose={() => setReportingResult(null)}
+          questionId={reportingResult.questionId}
+          questionTitle={reportingResult.stadiumName}
+          originalName={reportingResult.stadiumName}
+          originalCoordinates={reportingResult.correctCoordinates}
+          userCoordinates={reportingResult.userCoordinates}
+        />
+      )}
     </div>
   );
 };

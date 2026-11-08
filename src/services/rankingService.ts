@@ -21,8 +21,26 @@ export const DEFAULT_GAS_API_URL =
 const STORAGE_KEYS = {
   API_URL: 'sakachizu_ranking_api_url',
   PLAYER_NAME: 'sakachizu_player_name',
+  PLAYER_ID: 'sakachizu_user_unique_id',
   LOCAL_RANKINGS: 'sakachizu_local_rankings',
 };
+
+/**
+ * 永続的なプレイヤー固有IDを取得（未生成時は自動生成して保存）
+ */
+export function getPlayerUniqueId(): string {
+  try {
+    let id = localStorage.getItem(STORAGE_KEYS.PLAYER_ID);
+    if (!id || !id.trim()) {
+      const rand = Math.random().toString(36).substring(2, 8).toUpperCase();
+      id = `PLY-${rand}`;
+      localStorage.setItem(STORAGE_KEYS.PLAYER_ID, id);
+    }
+    return id;
+  } catch (e) {
+    return 'PLY-GUEST';
+  }
+}
 
 /**
  * 設定されたGAS Web App URLを取得（未設定時はデフォルトのデプロイURLを使用）
@@ -223,12 +241,14 @@ export async function submitScore(payload: {
   totalDistanceKm: number;
   avgTimeFormatted: string;
   questionCount: number;
+  playerId?: string;
   mode?: string;
   categoryName?: string;
   difficulty?: string;
 }): Promise<{ success: boolean; isOnline: boolean; message: string }> {
   // プレイヤー名をローカル記憶
   savePlayerName(payload.playerName);
+  const playerId = payload.playerId || getPlayerUniqueId();
 
   const apiUrl = getRankingApiUrl();
   if (!apiUrl) {
@@ -246,6 +266,7 @@ export async function submitScore(payload: {
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify({
         action: 'submit',
+        playerId,
         ...payload,
         playedAt: new Date().toISOString(),
       }),
@@ -265,6 +286,7 @@ export async function submitScore(payload: {
   try {
     const encoded = encodeURIComponent(
       JSON.stringify({
+        playerId,
         ...payload,
         playedAt: new Date().toISOString(),
       })

@@ -52,6 +52,7 @@ export const AiQuestionGenerator: React.FC<{
   const [messages, setMessages] = useState<Message[]>([]);
   const [backups, setBackups] = useState<BackupSnapshot[]>([]);
   const [backupNotice, setBackupNotice] = useState<string | null>(null);
+  const [selectedCardIds, setSelectedCardIds] = useState<Set<string>>(new Set());
 
   // 初期ロード：APIキー＆バックアップ一覧取得
   useEffect(() => {
@@ -280,6 +281,172 @@ export const AiQuestionGenerator: React.FC<{
     );
   };
 
+  // カードの単一複製
+  const handleDuplicateCard = (msgId: string, cardId: string) => {
+    setMessages((prev) =>
+      prev.map((m) => {
+        if (m.id !== msgId || !m.generatedQuestions) return m;
+        const targetIdx = m.generatedQuestions.findIndex((c) => c.cardId === cardId);
+        if (targetIdx === -1) return m;
+        const target = m.generatedQuestions[targetIdx];
+        const newCard: GeneratedQuestionItem = {
+          ...target,
+          cardId: `gen-card-${Date.now()}-copy`,
+          title: `${target.title} (コピー)`,
+          isAdded: false,
+          isEditing: false,
+        };
+        const updated = [...m.generatedQuestions];
+        updated.splice(targetIdx + 1, 0, newCard);
+        return { ...m, generatedQuestions: updated };
+      })
+    );
+  };
+
+  // カード選択トグル
+  const handleToggleSelectCard = (cardId: string) => {
+    setSelectedCardIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(cardId)) {
+        next.delete(cardId);
+      } else {
+        next.add(cardId);
+      }
+      return next;
+    });
+  };
+
+  // メッセージ内の全選択 / 全解除
+  const handleToggleSelectAllInMsg = (msgId: string) => {
+    const targetMsg = messages.find((m) => m.id === msgId);
+    if (!targetMsg || !targetMsg.generatedQuestions) return;
+
+    const allIds = targetMsg.generatedQuestions.map((c) => c.cardId);
+    const allSelected = allIds.every((id) => selectedCardIds.has(id));
+
+    setSelectedCardIds((prev) => {
+      const next = new Set(prev);
+      if (allSelected) {
+        allIds.forEach((id) => next.delete(id));
+      } else {
+        allIds.forEach((id) => next.add(id));
+      }
+      return next;
+    });
+  };
+
+  // 選択されたカードの一括実装（問題集に追加）
+  const handleBatchAddQuestions = (msgId: string) => {
+    const targetMsg = messages.find((m) => m.id === msgId);
+    if (!targetMsg || !targetMsg.generatedQuestions) return;
+
+    const cardsToAdd = targetMsg.generatedQuestions.filter(
+      (c) => selectedCardIds.has(c.cardId) && !c.isAdded
+    );
+    if (cardsToAdd.length === 0) {
+      alert('追加可能な未実装カードが選択されていません。');
+      return;
+    }
+
+    cardsToAdd.forEach((card) => {
+      addQuestion({
+        title: card.title,
+        question: card.question,
+        hint: card.hint,
+        categoryId: card.categoryId,
+        difficulty: card.difficulty,
+        tags: card.tags,
+        answer: {
+          name: card.venueName,
+          address: card.address,
+          latitude: card.latitude,
+          longitude: card.longitude,
+        },
+        isPublished: true,
+      });
+    });
+
+    const addedIds = new Set(cardsToAdd.map((c) => c.cardId));
+
+    setMessages((prev) =>
+      prev.map((m) => {
+        if (m.id !== msgId || !m.generatedQuestions) return m;
+        return {
+          ...m,
+          generatedQuestions: m.generatedQuestions.map((c) =>
+            addedIds.has(c.cardId) ? { ...c, isAdded: true, isEditing: false } : c
+          ),
+        };
+      })
+    );
+
+    if (onQuestionAdded) {
+      onQuestionAdded();
+    }
+  };
+
+  // 選択されたカードの一括複製
+  const handleBatchDuplicate = (msgId: string) => {
+    const targetMsg = messages.find((m) => m.id === msgId);
+    if (!targetMsg || !targetMsg.generatedQuestions) return;
+
+    const cardsToDuplicate = targetMsg.generatedQuestions.filter((c) =>
+      selectedCardIds.has(c.cardId)
+    );
+    if (cardsToDuplicate.length === 0) return;
+
+    const newCopies: GeneratedQuestionItem[] = cardsToDuplicate.map((target, idx) => ({
+      ...target,
+      cardId: `gen-card-${Date.now()}-batch-${idx}`,
+      title: `${target.title} (コピー)`,
+      isAdded: false,
+      isEditing: false,
+    }));
+
+    setMessages((prev) =>
+      prev.map((m) => {
+        if (m.id !== msgId || !m.generatedQuestions) return m;
+        return {
+          ...m,
+          generatedQuestions: [...m.generatedQuestions, ...newCopies],
+        };
+      })
+    );
+  };
+
+  // 選択されたカードの一括破棄
+  const handleBatchDelete = (msgId: string) => {
+    const targetMsg = messages.find((m) => m.id === msgId);
+    if (!targetMsg || !targetMsg.generatedQuestions) return;
+
+    const count = targetMsg.generatedQuestions.filter((c) =>
+      selectedCardIds.has(c.cardId)
+    ).length;
+    if (count === 0) return;
+
+    if (!window.confirm(`選択した ${count} 件の問題カードを破棄しますか？`)) return;
+
+    setMessages((prev) =>
+      prev.map((m) => {
+        if (m.id !== msgId || !m.generatedQuestions) return m;
+        return {
+          ...m,
+          generatedQuestions: m.generatedQuestions.filter(
+            (c) => !selectedCardIds.has(c.cardId)
+          ),
+        };
+      })
+    );
+
+    setSelectedCardIds((prev) => {
+      const next = new Set(prev);
+      targetMsg.generatedQuestions?.forEach((c) => {
+        if (next.has(c.cardId)) next.delete(c.cardId);
+      });
+      return next;
+    });
+  };
+
   // カードの削除
   const handleDeleteCard = (msgId: string, cardId: string) => {
     setMessages((prev) =>
@@ -291,6 +458,11 @@ export const AiQuestionGenerator: React.FC<{
         };
       })
     );
+    setSelectedCardIds((prev) => {
+      const next = new Set(prev);
+      next.delete(cardId);
+      return next;
+    });
   };
 
   return (
@@ -428,45 +600,121 @@ export const AiQuestionGenerator: React.FC<{
               <div className="ai-message-text">{msg.text}</div>
 
               {/* 生成された問題カードリスト */}
-              {msg.generatedQuestions && msg.generatedQuestions.length > 0 && (
-                <div className="generated-cards-grid">
-                  {msg.generatedQuestions.map((card) => {
-                    const mapUrl = safeCreateGoogleMapSearchUrl(card.latitude, card.longitude);
-                    return (
-                      <div
-                        key={card.cardId}
-                        className={`gen-question-card ${card.isAdded ? 'is-added' : ''}`}
-                      >
-                        {card.isAdded && (
-                          <div className="card-added-badge">
-                            ✅ 問題集に実装済み
-                          </div>
-                        )}
+              {msg.generatedQuestions && msg.generatedQuestions.length > 0 && (() => {
+                const selectedInThisMsg = msg.generatedQuestions.filter((c) =>
+                  selectedCardIds.has(c.cardId)
+                );
+                const isAllSelected =
+                  selectedInThisMsg.length === msg.generatedQuestions.length &&
+                  msg.generatedQuestions.length > 0;
 
-                        {!card.isEditing ? (
-                          // 表示モード
-                          <div className="card-body">
-                            <div className="card-top-row">
-                              <span className={`difficulty-tag difficulty-${card.difficulty}`}>
-                                {card.difficulty === 'easy'
-                                  ? '初級'
-                                  : card.difficulty === 'medium'
-                                  ? '中級'
-                                  : card.difficulty === 'hard'
-                                  ? '上級'
-                                  : '激ムズ'}
-                              </span>
-                              <span className="category-tag-badge">
-                                📂 {categories.find((c) => c.id === card.categoryId)?.name || card.categoryId}
-                              </span>
-                              <div className="tags-list">
-                                {card.tags.map((t, tidx) => (
-                                  <span key={tidx} className="cyber-tag-chip">
-                                    #{t}
-                                  </span>
-                                ))}
-                              </div>
+                return (
+                  <>
+                    {/* 一括操作バー */}
+                    <div className="ai-cards-batch-bar">
+                      <div className="batch-select-info">
+                        <label className="batch-select-all-label">
+                          <input
+                            type="checkbox"
+                            checked={isAllSelected}
+                            onChange={() => handleToggleSelectAllInMsg(msg.id)}
+                            className="cyber-checkbox"
+                          />
+                          <span>
+                            {isAllSelected ? '全選択を解除' : 'すべて選択'} (
+                            <strong>{selectedInThisMsg.length}</strong> /{' '}
+                            {msg.generatedQuestions.length} 件)
+                          </span>
+                        </label>
+                      </div>
+
+                      {selectedInThisMsg.length > 0 && (
+                        <div className="batch-actions-btns">
+                          <button
+                            type="button"
+                            className="primary-btn batch-add-btn"
+                            onClick={() => handleBatchAddQuestions(msg.id)}
+                            title="選択したカードをすべて問題集に追加"
+                          >
+                            ✅ 選択した {selectedInThisMsg.length} 問を追加（実装）
+                          </button>
+                          <button
+                            type="button"
+                            className="secondary-btn batch-dup-btn"
+                            onClick={() => handleBatchDuplicate(msg.id)}
+                            title="選択したカードを複製"
+                          >
+                            📋 複製 ({selectedInThisMsg.length})
+                          </button>
+                          <button
+                            type="button"
+                            className="secondary-btn batch-del-btn"
+                            onClick={() => handleBatchDelete(msg.id)}
+                            title="選択したカードを破棄"
+                          >
+                            🗑️ 破棄 ({selectedInThisMsg.length})
+                          </button>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="generated-cards-grid">
+                      {msg.generatedQuestions.map((card) => {
+                        const mapUrl = safeCreateGoogleMapSearchUrl(card.latitude, card.longitude);
+                        const isSelected = selectedCardIds.has(card.cardId);
+
+                        return (
+                          <div
+                            key={card.cardId}
+                            className={`gen-question-card ${card.isAdded ? 'is-added' : ''} ${
+                              isSelected ? 'is-selected' : ''
+                            }`}
+                          >
+                            {/* 右上チェックボックス ＆ 実装済みバッジ */}
+                            <div className="card-top-right-bar">
+                              {card.isAdded && (
+                                <span className="card-added-badge">
+                                  ✅ 実装済み
+                                </span>
+                              )}
+                              <label
+                                className="card-checkbox-label"
+                                title={isSelected ? '選択を解除' : 'このカードを選択'}
+                              >
+                                <input
+                                  type="checkbox"
+                                  checked={isSelected}
+                                  onChange={() => handleToggleSelectCard(card.cardId)}
+                                  className="card-select-checkbox"
+                                />
+                                <span className="card-checkbox-custom"></span>
+                              </label>
                             </div>
+
+                            {!card.isEditing ? (
+                              // 表示モード
+                              <div className="card-body">
+                                <div className="card-top-row">
+                                  <span className={`difficulty-tag difficulty-${card.difficulty}`}>
+                                    {card.difficulty === 'easy'
+                                      ? '初級'
+                                      : card.difficulty === 'medium'
+                                      ? '中級'
+                                      : card.difficulty === 'hard'
+                                      ? '上級'
+                                      : '激ムズ'}
+                                  </span>
+                                  <span className="category-tag-badge">
+                                    📂 {categories.find((c) => c.id === card.categoryId)?.name || card.categoryId}
+                                  </span>
+                                  <div className="tags-list">
+                                    {card.tags.map((t, tidx) => (
+                                      <span key={tidx} className="cyber-tag-chip">
+                                        #{t}
+                                      </span>
+                                    ))}
+                                  </div>
+                                </div>
 
                             <h4 className="card-title">{card.title}</h4>
                             <p className="card-question-text">{card.question}</p>
@@ -543,6 +791,15 @@ export const AiQuestionGenerator: React.FC<{
                                   実装完了
                                 </button>
                               )}
+
+                              <button
+                                type="button"
+                                className="secondary-btn duplicate-card-btn"
+                                onClick={() => handleDuplicateCard(msg.id, card.cardId)}
+                                title="このカードを複製"
+                              >
+                                📋 複製
+                              </button>
 
                               <button
                                 type="button"
@@ -735,7 +992,9 @@ export const AiQuestionGenerator: React.FC<{
                     );
                   })}
                 </div>
-              )}
+              </>
+            );
+          })()}
             </div>
           </div>
         ))}

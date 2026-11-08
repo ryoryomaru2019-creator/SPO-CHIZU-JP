@@ -33,10 +33,11 @@ export interface GeneratedQuestionPayload {
   aiExplanation?: string;
 }
 
-const SYSTEM_INSTRUCTION = `あなたは日本全国のサッカースタジアム、スポーツ施設、名所、歴史的地点に関するクイズ出題の超専門家AIです。
-ユーザーの要望（クラブ名、スタジアム、地域、エピソード、難易度など）に基づき、地図位置当てクイズゲーム「SPO-CHIZU-JP」用の問題を生成してください。
+const SYSTEM_INSTRUCTION_BASE = `あなたは日本全国のサッカースタジアム、スポーツ施設、名所、歴史的地点に関するクイズ出題の超専門家AIです。
+ユーザーの要望（クラブ名、スタジアム、地域、エピソード、難易度、指定問題数など）に基づき、地図位置当てクイズゲーム「SPO-CHIZU-JP」用の問題を生成してください。
 
-必ず以下のJSONオブジェクトの形式（配列で1〜3問）で出力してください。Markdownのコードブロックは使わず、純粋なJSON文字列として出力するか、JSONのみを返してください。
+必ず以下のJSONオブジェクトの形式の配列で出力してください。Markdownのコードブロックは使わず、純粋なJSON文字列として出力するか、JSONのみを返してください。
+【重要】ユーザーが「20問」「10個」など問題数を指定している場合は、必ずその指定された問題数の件数を配列内に厳密に作成してください。特に指定がない場合でも、充実したバリエーションで5問程度作成してください。
 
 スキーマ仕様:
 [
@@ -70,17 +71,24 @@ export async function generateQuestionWithGemini(
     throw new Error('Gemini API Keyが設定されていません。APIキーを入力してください。');
   }
 
+  // プロンプトから指定問数を検出 (例: "20問", "20個", "20件", "20つ")
+  const countMatch = prompt.match(/(\d+)\s*(問|個|件|つ)/);
+  const requestedCount = countMatch ? parseInt(countMatch[1], 10) : null;
+  const countInstruction = requestedCount
+    ? `\n\n【必須】必ず厳密に ${requestedCount} 件の問題オブジェクトを配列内に生成してください。途中で省略せず、1件目から${requestedCount}件目まで全て出力してください。`
+    : `\n\n【指示】ユーザーの要望に応じた適切な問題数（特に指定がなければ5問程度）を配列で生成してください。`;
+
   const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
   const body = {
     system_instruction: {
-      parts: [{ text: SYSTEM_INSTRUCTION }],
+      parts: [{ text: SYSTEM_INSTRUCTION_BASE }],
     },
     contents: [
       {
         parts: [
           {
-            text: `以下の要望に基づき、ゲーム用の問題データを作成してください:\n\n要望: ${prompt}`,
+            text: `以下の要望に基づき、ゲーム用の問題データを作成してください:\n\n要望: ${prompt}${countInstruction}`,
           },
         ],
       },
@@ -88,6 +96,7 @@ export async function generateQuestionWithGemini(
     generationConfig: {
       responseMimeType: 'application/json',
       temperature: 0.7,
+      maxOutputTokens: 8192,
     },
   };
 
