@@ -182,12 +182,6 @@ function queryReports() {
     };
   });
 }
-    }
-    return handleScoreSubmission(body);
-  } catch (err) {
-    return makeJsonResponse({ status: 'error', message: err.toString() });
-  }
-}
 
 // スコア登録処理
 function handleScoreSubmission(payload) {
