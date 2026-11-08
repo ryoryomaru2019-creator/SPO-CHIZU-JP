@@ -1,0 +1,1004 @@
+{
+  "summary": {
+    "total_clubs": 60,
+    "total_club_questions": 600,
+    "regular_questions_retained": 60,
+    "total_combined_questions": 660,
+    "verified_at": "2026-11-07T17:36:48.995Z",
+    "status": "PASS"
+  },
+  "leagues": {
+    "J1": {
+      "club_count": 20,
+      "question_count": 200
+    },
+    "J2": {
+      "club_count": 20,
+      "question_count": 200
+    },
+    "J3": {
+      "club_count": 20,
+      "question_count": 200
+    }
+  },
+  "theme_distribution": {
+    "club_name_origin": 60,
+    "club_color": 60,
+    "mascot": 60,
+    "predecessor": 60,
+    "club_founding": 60,
+    "historic_match": 60,
+    "title": 60,
+    "hometown": 60,
+    "supporter_culture": 60,
+    "extreme_trivia": 60
+  },
+  "difficulty_distribution": {
+    "easy": 287,
+    "medium": 178,
+    "hard": 118,
+    "expert": 17
+  },
+  "clubs": [
+    {
+      "club_name": "鹿島アントラーズ",
+      "club_id": "kashima_antlers",
+      "league": "J1",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 3,
+        "hard": 2,
+        "expert": 1
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "水戸ホーリーホック",
+      "club_id": "mito_hollyhock",
+      "league": "J1",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 3,
+        "medium": 3,
+        "hard": 3,
+        "expert": 1
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "浦和レッズ",
+      "club_id": "urawa_reds",
+      "league": "J1",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 4,
+        "hard": 1,
+        "expert": 1
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "ジェフユナイテッド千葉",
+      "club_id": "jef_united_chiba",
+      "league": "J1",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 3,
+        "hard": 1,
+        "expert": 1
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "柏レイソル",
+      "club_id": "kashiwa_reysol",
+      "league": "J1",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 3,
+        "medium": 4,
+        "hard": 2,
+        "expert": 1
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "FC東京",
+      "club_id": "fc_tokyo",
+      "league": "J1",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 3,
+        "hard": 2,
+        "expert": 1
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "東京ヴェルディ",
+      "club_id": "tokyo_verdy",
+      "league": "J1",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 4,
+        "hard": 1,
+        "expert": 1
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "FC町田ゼルビア",
+      "club_id": "fc_machida_zelvia",
+      "league": "J1",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 4,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "川崎フロンターレ",
+      "club_id": "kawasaki_frontale",
+      "league": "J1",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 2,
+        "hard": 2,
+        "expert": 1
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "横浜F・マリノス",
+      "club_id": "yokohama_f_marinos",
+      "league": "J1",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 2,
+        "hard": 2,
+        "expert": 1
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "清水エスパルス",
+      "club_id": "shimizu_s_pulse",
+      "league": "J1",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 4,
+        "hard": 1,
+        "expert": 1
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "名古屋グランパス",
+      "club_id": "nagoya_grampus",
+      "league": "J1",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 3,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "京都サンガF.C.",
+      "club_id": "kyoto_sanga",
+      "league": "J1",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 4,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "ガンバ大阪",
+      "club_id": "gamba_osaka",
+      "league": "J1",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 3,
+        "hard": 1,
+        "expert": 1
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "セレッソ大阪",
+      "club_id": "cerezo_osaka",
+      "league": "J1",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 3,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "ヴィッセル神戸",
+      "club_id": "vissel_kobe",
+      "league": "J1",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 6,
+        "medium": 2,
+        "hard": 1,
+        "expert": 1
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "ファジアーノ岡山",
+      "club_id": "fagiano_okayama",
+      "league": "J1",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 2,
+        "hard": 3,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "サンフレッチェ広島",
+      "club_id": "sanfrecce_hiroshima",
+      "league": "J1",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 4,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "アビスパ福岡",
+      "club_id": "avispa_fukuoka",
+      "league": "J1",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 3,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "V・ファーレン長崎",
+      "club_id": "v_varen_nagasaki",
+      "league": "J1",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 6,
+        "medium": 1,
+        "hard": 3,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "北海道コンサドーレ札幌",
+      "club_id": "consadole_sapporo",
+      "league": "J2",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 3,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "ヴァンラーレ八戸",
+      "club_id": "vanraure_hachinohe",
+      "league": "J2",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 3,
+        "hard": 3,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "ベガルタ仙台",
+      "club_id": "vegalta_sendai",
+      "league": "J2",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 3,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "ブラウブリッツ秋田",
+      "club_id": "blaublitz_akita",
+      "league": "J2",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 4,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "モンテディオ山形",
+      "club_id": "montedio_yamagata",
+      "league": "J2",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 2,
+        "hard": 2,
+        "expert": 1
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "いわきFC",
+      "club_id": "iwaki_fc",
+      "league": "J2",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 4,
+        "hard": 1,
+        "expert": 1
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "栃木シティ",
+      "club_id": "tochigi_city",
+      "league": "J2",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 3,
+        "hard": 3,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "RB大宮アルディージャ",
+      "club_id": "rb_omiya_ardija",
+      "league": "J2",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 3,
+        "hard": 1,
+        "expert": 1
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "横浜FC",
+      "club_id": "yokohama_fc",
+      "league": "J2",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 3,
+        "medium": 6,
+        "hard": 1,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "湘南ベルマーレ",
+      "club_id": "shonan_bellmare",
+      "league": "J2",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 3,
+        "hard": 1,
+        "expert": 1
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "ヴァンフォーレ甲府",
+      "club_id": "ventforet_kofu",
+      "league": "J2",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 4,
+        "hard": 1,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "アルビレックス新潟",
+      "club_id": "albirex_niigata",
+      "league": "J2",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 7,
+        "medium": 1,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "カターレ富山",
+      "club_id": "kataller_toyama",
+      "league": "J2",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 4,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "ジュビロ磐田",
+      "club_id": "jubilo_iwata",
+      "league": "J2",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 3,
+        "hard": 2,
+        "expert": 1
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "藤枝MYFC",
+      "club_id": "fujieda_myfc",
+      "league": "J2",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 3,
+        "hard": 3,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "徳島ヴォルティス",
+      "club_id": "tokushima_vortis",
+      "league": "J2",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 4,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "FC今治",
+      "club_id": "fc_imabari",
+      "league": "J2",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 3,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "サガン鳥栖",
+      "club_id": "sagan_tosu",
+      "league": "J2",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 3,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "大分トリニータ",
+      "club_id": "oita_trinita",
+      "league": "J2",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 6,
+        "medium": 2,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "テゲバジャーロ宮崎",
+      "club_id": "tegevajaro_miyazaki",
+      "league": "J2",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 6,
+        "medium": 3,
+        "hard": 1,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "福島ユナイテッドFC",
+      "club_id": "fukushima_united",
+      "league": "J3",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 3,
+        "hard": 3,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "栃木SC",
+      "club_id": "tochigi_sc",
+      "league": "J3",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 3,
+        "medium": 4,
+        "hard": 3,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "ザスパ群馬",
+      "club_id": "thespa_gunma",
+      "league": "J3",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 3,
+        "hard": 3,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "SC相模原",
+      "club_id": "sc_sagamihara",
+      "league": "J3",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 3,
+        "hard": 3,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "松本山雅FC",
+      "club_id": "matsumoto_yamaga",
+      "league": "J3",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 6,
+        "medium": 2,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "AC長野パルセイロ",
+      "club_id": "ac_nagano_parceiro",
+      "league": "J3",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 3,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "ツエーゲン金沢",
+      "club_id": "zweigen_kanazawa",
+      "league": "J3",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 2,
+        "hard": 3,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "FC岐阜",
+      "club_id": "fc_gifu",
+      "league": "J3",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 2,
+        "hard": 3,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "レイラック滋賀FC",
+      "club_id": "reilac_shiga",
+      "league": "J3",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 3,
+        "hard": 3,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "FC大阪",
+      "club_id": "fc_osaka",
+      "league": "J3",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 7,
+        "medium": 1,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "奈良クラブ",
+      "club_id": "nara_club",
+      "league": "J3",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 3,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "ガイナーレ鳥取",
+      "club_id": "gainare_tottori",
+      "league": "J3",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 4,
+        "medium": 4,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "レノファ山口FC",
+      "club_id": "renofa_yamaguchi",
+      "league": "J3",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 6,
+        "medium": 3,
+        "hard": 1,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "カマタマーレ讃岐",
+      "club_id": "kamatamare_sanuki",
+      "league": "J3",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 2,
+        "hard": 3,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "愛媛FC",
+      "club_id": "ehime_fc",
+      "league": "J3",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 6,
+        "medium": 3,
+        "hard": 1,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "高知ユナイテッドSC",
+      "club_id": "kochi_united",
+      "league": "J3",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 5,
+        "medium": 3,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "ギラヴァンツ北九州",
+      "club_id": "giravanz_kitakyushu",
+      "league": "J3",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 6,
+        "medium": 3,
+        "hard": 1,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "ロアッソ熊本",
+      "club_id": "roasso_kumamoto",
+      "league": "J3",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 7,
+        "medium": 1,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "鹿児島ユナイテッドFC",
+      "club_id": "kagoshima_united",
+      "league": "J3",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 6,
+        "medium": 2,
+        "hard": 2,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    },
+    {
+      "club_name": "FC琉球",
+      "club_id": "fc_ryukyu",
+      "league": "J3",
+      "required_questions": 10,
+      "actual_questions": 10,
+      "difficulty_counts": {
+        "easy": 6,
+        "medium": 3,
+        "hard": 1,
+        "expert": 0
+      },
+      "unique_themes_count": 10,
+      "is_valid": true,
+      "coordinates_valid": true
+    }
+  ]
+}

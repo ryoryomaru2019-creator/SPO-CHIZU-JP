@@ -1,0 +1,128 @@
+[
+  {
+    "id": "japan-stadium",
+    "name": "日本のスタジアム",
+    "description": "日本国内のサッカー会場",
+    "isEnabled": true
+  },
+  {
+    "id": "jleague",
+    "name": "Jリーグ会場",
+    "description": "Jリーグクラブのホーム会場",
+    "isEnabled": true
+  },
+  {
+    "id": "national-team",
+    "name": "代表戦会場",
+    "description": "日本代表などの国際試合会場",
+    "isEnabled": true
+  },
+  {
+    "id": "world-stadium",
+    "name": "世界のスタジアム",
+    "description": "海外のサッカー会場",
+    "isEnabled": true
+  },
+  {
+    "id": "j1-stadium",
+    "name": "J1スタジアム",
+    "description": "2026/27シーズン J1クラブのホーム会場",
+    "isEnabled": true
+  },
+  {
+    "id": "j2-stadium",
+    "name": "J2スタジアム",
+    "description": "2026/27シーズン J2クラブのホーム会場",
+    "isEnabled": true
+  },
+  {
+    "id": "j3-stadium",
+    "name": "J3スタジアム",
+    "description": "2026/27シーズン J3クラブのホーム会場",
+    "isEnabled": true
+  },
+  {
+    "id": "soccer-specific",
+    "name": "サッカー専用スタジアム",
+    "description": "ピッチとスタンドの距離が近いサッカー専用会場",
+    "isEnabled": true
+  },
+  {
+    "id": "track-and-field",
+    "name": "陸上競技場・多目的スタジアム",
+    "description": "陸上トラック併設または多目的競技場",
+    "isEnabled": true
+  },
+  {
+    "id": "club_specific",
+    "name": "クラブ固有ファンクイズ",
+    "description": "各クラブの歴史・文化・由緒に関する固有クイズ",
+    "isEnabled": true
+  },
+  {
+    "id": "club_fan",
+    "name": "ファンクイズ",
+    "description": "クラブサポーター向け詳細問題",
+    "isEnabled": true
+  },
+  {
+    "id": "club_name_origin",
+    "name": "クラブ名の由来",
+    "description": "由来となった史跡・神社・山・地名",
+    "isEnabled": true
+  },
+  {
+    "id": "club_color",
+    "name": "クラブカラー",
+    "description": "チームカラーの由来となった名所・自然",
+    "isEnabled": true
+  },
+  {
+    "id": "mascot",
+    "name": "マスコット",
+    "description": "マスコットモチーフの生息地・城・神社",
+    "isEnabled": true
+  },
+  {
+    "id": "predecessor",
+    "name": "前身クラブ",
+    "description": "前身チームの創業地・発祥地・活動拠点",
+    "isEnabled": true
+  },
+  {
+    "id": "club_founding",
+    "name": "クラブ創設・活動拠点",
+    "description": "クラブハウス・専用練習場",
+    "isEnabled": true
+  },
+  {
+    "id": "historic_match",
+    "name": "歴史的な試合",
+    "description": "初昇格・初戦・劇的勝利の会場",
+    "isEnabled": true
+  },
+  {
+    "id": "title",
+    "name": "タイトル",
+    "description": "初タイトル・優勝決定試合会場",
+    "isEnabled": true
+  },
+  {
+    "id": "hometown",
+    "name": "ホームタウン",
+    "description": "街を象徴する施設・市役所・モニュメント",
+    "isEnabled": true
+  },
+  {
+    "id": "supporter_culture",
+    "name": "サポーター応援文化",
+    "description": "チャント発祥地・聖地・名物スタグル",
+    "isEnabled": true
+  },
+  {
+    "id": "extreme_trivia",
+    "name": "ファン向け激ムズ問題",
+    "description": "サポーター向けカルト問題・伝説の試合会場",
+    "isEnabled": true
+  }
+]

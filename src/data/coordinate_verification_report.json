@@ -1,0 +1,962 @@
+[
+  {
+    "question_id": "q-j1-001",
+    "club_name": "鹿島アントラーズ",
+    "venue_name": "茨城県立カシマサッカースタジアム",
+    "latitude": 35.9918,
+    "longitude": 140.6433,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.antlers.co.jp/stadium",
+      "http://www.so-net.ne.jp/antlers/kashima-stadium/",
+      "https://city.kashima.ibaraki.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "クラブ公式サイト及び茨城県公式情報より、スタジアム本体ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j1-002",
+    "club_name": "水戸ホーリーホック",
+    "venue_name": "水戸市立競技場",
+    "latitude": 36.3453,
+    "longitude": 140.4123,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.mito-hollyhock.net/match/stadium/",
+      "https://www.city.mito.lg.jp/site/sports/4574.html",
+      "https://www.city.mito.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "水戸市公式スポーツ施設情報及びクラブ公式サイトよりメイン競技場ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j1-003",
+    "club_name": "浦和レッズ",
+    "venue_name": "埼玉スタジアム2002",
+    "latitude": 35.9032,
+    "longitude": 139.7175,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.urawa-reds.co.jp/game/stadium/saitama.php",
+      "https://www.saitama-stadium2002.com/",
+      "https://www.city.saitama.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "埼玉県公園緑地協会公式情報及びクラブ公式情報よりスタジアムピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j1-004",
+    "club_name": "ジェフユナイテッド千葉",
+    "venue_name": "千葉市蘇我球技場",
+    "latitude": 35.5786,
+    "longitude": 140.1239,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://jefunited.co.jp/access/fukuda/",
+      "https://sogasportspark.com/",
+      "https://www.city.chiba.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "千葉市公式情報及びスタジアム公式情報より球技場本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j1-005",
+    "club_name": "柏レイソル",
+    "venue_name": "日立柏サッカー場",
+    "latitude": 35.8488,
+    "longitude": 139.9754,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.reysol.co.jp/ticket/stadium/",
+      "https://www.reysol.co.jp/club/hitachidai.php",
+      "https://www.city.kashiwa.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "クラブ公式サイト情報よりスタジアムピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j1-006",
+    "club_name": "FC東京",
+    "venue_name": "東京スタジアム",
+    "latitude": 35.6643,
+    "longitude": 139.5272,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.fctokyo.co.jp/game/stadium/",
+      "https://www.ajinomotostadium.com/",
+      "https://www.city.chofu.tokyo.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "東京スタジアム公式情報およびクラブ公式情報よりスタジアム本体中央位置を確認（東京ヴェルディと共用）"
+  },
+  {
+    "question_id": "q-j1-007",
+    "club_name": "東京ヴェルディ",
+    "venue_name": "東京スタジアム",
+    "latitude": 35.6643,
+    "longitude": 139.5272,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.verdy.co.jp/content/clubstadium/stadium/",
+      "https://www.ajinomotostadium.com/",
+      "https://www.city.chofu.tokyo.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "クラブ公式情報およびスタジアム公式情報よりスタジアム本体中央位置を確認（FC東京と共用）"
+  },
+  {
+    "question_id": "q-j1-008",
+    "club_name": "FC町田ゼルビア",
+    "venue_name": "町田市立陸上競技場",
+    "latitude": 35.5925,
+    "longitude": 139.439,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.zelvia.co.jp/stadium/",
+      "https://nozuta-park.com/",
+      "https://www.city.machida.tokyo.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "町田市公式公園施設情報およびクラブ公式情報より競技場本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j1-009",
+    "club_name": "川崎フロンターレ",
+    "venue_name": "等々力陸上競技場",
+    "latitude": 35.5866,
+    "longitude": 139.6508,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.frontale.co.jp/access/todoroki.html",
+      "https://www.city.kawasaki.jp/shisetsu/category/28-5-1-1-0-0-0-0-0-0.html",
+      "https://www.city.kawasaki.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "川崎市公式施設情報およびクラブ公式サイトよりスタジアム本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j1-010",
+    "club_name": "横浜F・マリノス",
+    "venue_name": "横浜国際総合競技場",
+    "latitude": 35.5101,
+    "longitude": 139.6063,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.f-marinos.com/match/stadium/nissan",
+      "https://www.nissan-stadium.jp/",
+      "https://www.city.yokohama.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "日産スタジアム公式サイト及びクラブ公式情報よりスタジアムピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j1-011",
+    "club_name": "清水エスパルス",
+    "venue_name": "静岡市清水日本平運動公園球技場",
+    "latitude": 34.985,
+    "longitude": 138.4811,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.s-pulse.co.jp/stadium",
+      "https://nihondaira-stadium.com/",
+      "https://www.city.shizuoka.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "静岡市公式スポーツ施設情報およびクラブ公式サイトよりピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j1-012",
+    "club_name": "名古屋グランパス",
+    "venue_name": "豊田スタジアム",
+    "latitude": 35.0846,
+    "longitude": 137.1709,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://nagoya-grampus.jp/stadium/toyota-stadium/",
+      "https://www.toyota-stadium.co.jp/",
+      "https://www.city.toyota.aichi.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "豊田スタジアム公式サイトおよびクラブ公式情報より主なホーム会場本体ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j1-013",
+    "club_name": "京都サンガF.C.",
+    "venue_name": "京都府立京都スタジアム",
+    "latitude": 35.0152,
+    "longitude": 135.5847,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.sanga-fc.jp/guide/stadium",
+      "https://sangastadium-by-kyocera.jp/",
+      "https://www.pref.kyoto.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "京都府公式施設案内及びクラブ公式サイトより専用スタジアム本体ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j1-014",
+    "club_name": "ガンバ大阪",
+    "venue_name": "市立吹田サッカースタジアム",
+    "latitude": 34.8026,
+    "longitude": 135.5383,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.gamba-osaka.net/stadium/",
+      "https://suitacityfootballstadium.jp/",
+      "https://www.city.suita.osaka.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "吹田市公式サイト及びスタジアム公式サイトより旧万博競技場と区別した専用スタジアム本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j1-015",
+    "club_name": "セレッソ大阪",
+    "venue_name": "長居球技場",
+    "latitude": 34.6146,
+    "longitude": 135.5181,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.cerezo.jp/club/stadium/sakura/",
+      "https://www.sakura-stadium.jp/",
+      "https://www.city.osaka.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "長居わくわくパーク公式施設情報及びクラブ公式サイトより球技場本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j1-016",
+    "club_name": "ヴィッセル神戸",
+    "venue_name": "神戸市御崎公園球技場",
+    "latitude": 34.6568,
+    "longitude": 135.1691,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.vissel-kobe.co.jp/stadium/",
+      "https://www.noevir-stadium.jp/",
+      "https://www.city.kobe.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "神戸市公式施設情報及びスタジアム公式サイトより球技場本体ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j1-017",
+    "club_name": "ファジアーノ岡山",
+    "venue_name": "岡山県総合グラウンド陸上競技場",
+    "latitude": 34.6811,
+    "longitude": 133.9189,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.fagiano-okayama.com/game/stadium/",
+      "https://www.okayama-mspf.or.jp/ground/",
+      "https://www.city.okayama.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "岡山県総合グラウンド公式情報及びクラブ公式サイトより競技場本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j1-018",
+    "club_name": "サンフレッチェ広島",
+    "venue_name": "広島サッカースタジアム",
+    "latitude": 34.4012,
+    "longitude": 132.4537,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.sanfrecce.co.jp/stadium/",
+      "https://edion-peacewing.com/",
+      "https://www.city.hiroshima.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "広島市公式公園施設情報及びスタジアム公式サイトより新スタジアム本体ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j1-019",
+    "club_name": "アビスパ福岡",
+    "venue_name": "東平尾公園博多の森球技場",
+    "latitude": 33.5859,
+    "longitude": 130.4607,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.avispa.co.jp/game_practice/stadium",
+      "https://www.midorimachi.jp/park/facility.php?code=302001",
+      "https://www.city.fukuoka.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "福岡市緑のまちづくり協会公式案内及びクラブ公式サイトより球技場本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j1-020",
+    "club_name": "V・ファーレン長崎",
+    "venue_name": "PEACE STADIUM Connected by SoftBank",
+    "latitude": 32.7591,
+    "longitude": 129.865,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.v-varen.com/stadium_city",
+      "https://www.nagasakistadiumcity.com/",
+      "https://www.city.nagasaki.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "長崎スタジアムシティ公式情報及びクラブ公式情報より新ホームスタジアム本体ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j2-001",
+    "club_name": "北海道コンサドーレ札幌",
+    "venue_name": "札幌ドーム",
+    "latitude": 43.015,
+    "longitude": 141.4097,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.consadole-sapporo.jp/stadium/",
+      "https://www.sapporo-dome.co.jp/",
+      "https://www.city.sapporo.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "ドーム公式サイト及びクラブ公式サイトよりドーム本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j2-002",
+    "club_name": "ヴァンラーレ八戸",
+    "venue_name": "八戸市多賀多目的運動場天然芝球技場",
+    "latitude": 40.5905,
+    "longitude": 141.4561,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://vanraure.net/club/stadium",
+      "https://taga-playground.com/",
+      "https://www.city.hachinohe.aomori.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "八戸市公式施設案内及びクラブ公式サイトより球技場本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j2-003",
+    "club_name": "ベガルタ仙台",
+    "venue_name": "仙台市泉総合運動場七北田公園陸上競技場",
+    "latitude": 38.319,
+    "longitude": 140.8819,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.vegalta.co.jp/stadium/",
+      "https://www.spf-sendai.jp/sports/facility/detail.php?id=12",
+      "https://www.city.sendai.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "仙台市スポーツ振興事業団公式情報及びクラブ公式サイトよりスタジアム本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j2-004",
+    "club_name": "ブラウブリッツ秋田",
+    "venue_name": "秋田市八橋運動公園陸上競技場",
+    "latitude": 39.7214,
+    "longitude": 140.0963,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://blaublitz.jp/stadium",
+      "https://www.city.akita.lg.jp/shisetsu/sports-park/1004121.html",
+      "https://www.city.akita.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "秋田市教育委員会スポーツ振興課公式情報及びクラブ公式サイトより陸上競技場本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j2-005",
+    "club_name": "モンテディオ山形",
+    "venue_name": "山形県総合運動公園陸上競技場",
+    "latitude": 38.3377,
+    "longitude": 140.3781,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.montedioyamagata.jp/match/stadium/",
+      "https://park.montedio.co.jp/",
+      "https://www.pref.yamagata.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "山形県総合運動公園公式情報及びクラブ公式サイトより陸上競技場ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j2-006",
+    "club_name": "いわきFC",
+    "venue_name": "いわきグリーンフィールド",
+    "latitude": 37.0173,
+    "longitude": 140.8644,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://iwakifc.com/stadium/",
+      "https://iwakicity-park.or.jp/greenfield/",
+      "https://www.city.iwaki.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "いわき市公園緑地観光公社公式情報及びクラブ公式サイトより球技場本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j2-007",
+    "club_name": "栃木シティ",
+    "venue_name": "CITY FOOTBALL STATION",
+    "latitude": 36.3392,
+    "longitude": 139.6475,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://tochigi-city.com/club/stadium/",
+      "https://tochigi-city.com/cfs/",
+      "https://www.city.tochigi.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "栃木シティ公式サイト及び岩舟総合運動公園情報よりスタジアム本体ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j2-008",
+    "club_name": "RB大宮アルディージャ",
+    "venue_name": "さいたま市大宮公園サッカー場",
+    "latitude": 35.9163,
+    "longitude": 139.6339,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.ardija.co.jp/match/stadium/nack5.html",
+      "https://www.omiya-park.com/",
+      "https://www.city.saitama.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "さいたま市公園緑地協会公式情報及びクラブ公式サイトよりサッカー場ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j2-009",
+    "club_name": "横浜FC",
+    "venue_name": "三ツ沢公園球技場",
+    "latitude": 35.4704,
+    "longitude": 139.6033,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://yokohamafc.com/guide/stadium/",
+      "https://www.hama-midorinokyokai.or.jp/park/mitsuzawa/",
+      "https://www.city.yokohama.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "横浜市緑の協会公式情報及びクラブ公式サイトより球技場本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j2-010",
+    "club_name": "湘南ベルマーレ",
+    "venue_name": "平塚競技場",
+    "latitude": 35.3436,
+    "longitude": 139.3406,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.bellmare.co.jp/stadium",
+      "https://www.city.hiratsuka.kanagawa.jp/koen/page-c_00832.html",
+      "https://www.city.hiratsuka.kanagawa.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "平塚市公式施設情報及びクラブ公式サイトより競技場本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j2-011",
+    "club_name": "ヴァンフォーレ甲府",
+    "venue_name": "山梨県小瀬スポーツ公園陸上競技場",
+    "latitude": 35.6225,
+    "longitude": 138.5898,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.ventforet.jp/ticket/kose.html",
+      "https://www.kose-sp.or.jp/",
+      "https://www.pref.yamanashi.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "山梨県スポーツ協会小瀬スポーツ公園公式情報及びクラブ公式サイトより陸上競技場中央位置を確認"
+  },
+  {
+    "question_id": "q-j2-012",
+    "club_name": "アルビレックス新潟",
+    "venue_name": "新潟県スポーツ公園新潟スタジアム",
+    "latitude": 37.8824,
+    "longitude": 139.0592,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.albirex.co.jp/guide/stadium/",
+      "https://www.denka-bigswan.com/",
+      "https://www.city.niigata.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "新潟県スポーツ公園公式サイト及びクラブ公式サイトよりスタジアム本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j2-013",
+    "club_name": "カターレ富山",
+    "venue_name": "富山県総合運動公園陸上競技場",
+    "latitude": 36.6265,
+    "longitude": 137.1953,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.kataller.co.jp/stadium/",
+      "https://www.toyamap.or.jp/tskp/",
+      "https://www.pref.toyama.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "富山県総合運動公園公式サイト及びクラブ公式サイトより陸上競技場ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j2-014",
+    "club_name": "ジュビロ磐田",
+    "venue_name": "ヤマハスタジアム",
+    "latitude": 34.7247,
+    "longitude": 137.8765,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.jubilo-iwata.co.jp/stadium/",
+      "https://global.yamaha-motor.com/jp/sports/stadium/",
+      "https://www.city.iwata.shizuoka.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "ヤマハ発動機公式施設情報及びクラブ公式サイトより専用球技場本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j2-015",
+    "club_name": "藤枝MYFC",
+    "venue_name": "藤枝総合運動公園サッカー場",
+    "latitude": 34.8809,
+    "longitude": 138.2323,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://myfc.co.jp/match/stadium/",
+      "https://fujieda-spo-park.com/",
+      "https://www.city.fujieda.shizuoka.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "藤枝市公式施設案内及びクラブ公式サイトよりサッカー場ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j2-016",
+    "club_name": "徳島ヴォルティス",
+    "venue_name": "徳島県鳴門総合運動公園陸上競技場",
+    "latitude": 34.1685,
+    "longitude": 134.6186,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.vortis.jp/stadium/",
+      "https://www.tsm.or.jp/park/naruto/",
+      "https://www.pref.tokushima.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "徳島県スポーツ協会鳴門・大塚スポーツパーク公式情報及びクラブ公式サイトより陸上競技場ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j2-017",
+    "club_name": "FC今治",
+    "venue_name": "今治里山スタジアム",
+    "latitude": 34.0405,
+    "longitude": 132.9586,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://satoyamastadium.com/",
+      "https://www.fcimabari.com/club/satoyama_stadium.html",
+      "https://www.city.imabari.ehime.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "里山スタジアム公式サイト及びクラブ公式サイトよりスタジアム本体ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j2-018",
+    "club_name": "サガン鳥栖",
+    "venue_name": "鳥栖スタジアム",
+    "latitude": 33.3718,
+    "longitude": 130.5201,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.sagan-tosu.net/match/stadium/",
+      "https://www.city.tosu.lg.jp/soshiki/14/1564.html",
+      "https://www.city.tosu.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "鳥栖市公式施設情報及びクラブ公式サイトよりスタジアムピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j2-019",
+    "club_name": "大分トリニータ",
+    "venue_name": "大分スポーツ公園総合競技場",
+    "latitude": 33.2007,
+    "longitude": 131.6575,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.oita-trinita.co.jp/stadium/",
+      "https://www.oita-sportspark.jp/",
+      "https://www.pref.oita.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "大分スポーツ公園公式サイト及びクラブ公式サイトよりドーム競技場本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j2-020",
+    "club_name": "テゲバジャーロ宮崎",
+    "venue_name": "新富テゲバサッカースタジアム",
+    "latitude": 32.0731,
+    "longitude": 131.4918,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.tegevajaro.com/stadium",
+      "https://www.town.shintomi.lg.jp/",
+      "https://www.town.shintomi.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "新富町公式施設案内及びクラブ公式サイトより専用サッカー場本体ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j3-001",
+    "club_name": "福島ユナイテッドFC",
+    "venue_name": "福島県営あづま陸上競技場",
+    "latitude": 37.7225,
+    "longitude": 140.3667,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://fufc.jp/club/stadium/",
+      "https://www.azuma-sportspark.com/",
+      "https://www.pref.fukushima.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "福島県都市公園あづま総合運動公園公式情報及びクラブ公式サイトより陸上競技場中央位置を確認"
+  },
+  {
+    "question_id": "q-j3-002",
+    "club_name": "栃木SC",
+    "venue_name": "栃木県総合運動公園陸上競技場",
+    "latitude": 36.5165,
+    "longitude": 139.8569,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.tochigisc.jp/stadium/",
+      "https://www.park-tochigi.com/sougou/",
+      "https://www.pref.tochigi.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "栃木県総合運動公園公式案内及びクラブ公式サイトより主本拠地カンセキスタジアムとちぎ本体中央位置を確認（栃木シティと別クラブ）"
+  },
+  {
+    "question_id": "q-j3-003",
+    "club_name": "ザスパ群馬",
+    "venue_name": "群馬県立敷島公園県営陸上競技場",
+    "latitude": 36.4172,
+    "longitude": 139.0519,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://thespa.co.jp/stadium/",
+      "https://www.shikishima-park.org/",
+      "https://www.pref.gunma.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "敷島公園公式案内及びクラブ公式サイトより県営陸上競技場本体ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j3-004",
+    "club_name": "SC相模原",
+    "venue_name": "相模原麻溝公園競技場",
+    "latitude": 35.5297,
+    "longitude": 139.3872,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.scsagamihara.com/stadium",
+      "https://asamizopark.jp/",
+      "https://www.city.sagamihara.kanagawa.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "相模原市スポーツ施設まちづくり公社公式案内及びクラブ公式サイトより陸上競技場本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j3-005",
+    "club_name": "松本山雅FC",
+    "venue_name": "長野県松本平広域公園総合球技場",
+    "latitude": 36.1697,
+    "longitude": 137.9174,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.yamaga-fc.com/stadium",
+      "https://shinshu-skypark.net/",
+      "https://www.pref.nagano.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "長野県松本平広域公園公式情報及びクラブ公式サイトより球技場本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j3-006",
+    "club_name": "AC長野パルセイロ",
+    "venue_name": "長野市南長野運動公園総合球技場",
+    "latitude": 36.5786,
+    "longitude": 138.1672,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://parceiro.co.jp/stadium/",
+      "https://minaminagano.jp/",
+      "https://www.city.nagano.nagano.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "長野市公式施設案内及びクラブ公式サイトより球技場本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j3-007",
+    "club_name": "ツエーゲン金沢",
+    "venue_name": "金沢スタジアム",
+    "latitude": 36.5962,
+    "longitude": 136.6574,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.zweigen-kanazawa.jp/stadium/",
+      "https://kanazawa-stadium.jp/",
+      "https://www4.city.kanazawa.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "金沢スタジアム公式サイト及びクラブ公式サイトより新専用スタジアム本体ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j3-008",
+    "club_name": "FC岐阜",
+    "venue_name": "岐阜メモリアルセンター長良川競技場",
+    "latitude": 35.4414,
+    "longitude": 136.7645,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.fc-gifu.com/stadium/",
+      "https://www.gifuspo.or.jp/gmc/",
+      "https://www.pref.gifu.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "岐阜メモリアルセンター公式案内及びクラブ公式サイトより陸上競技場ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j3-009",
+    "club_name": "レイラック滋賀FC",
+    "venue_name": "彦根総合スポーツ公園陸上競技場",
+    "latitude": 35.2822,
+    "longitude": 136.255,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://reilac-shiga.co.jp/club/stadium",
+      "https://www.hikone-sports-park.jp/",
+      "https://www.pref.shiga.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "滋賀県彦根総合スポーツ公園公式情報及びクラブ公式サイトより陸上競技場本体ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j3-010",
+    "club_name": "FC大阪",
+    "venue_name": "東大阪市花園ラグビー場第1グラウンド",
+    "latitude": 34.6677,
+    "longitude": 135.6277,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://fc-osaka.com/stadium/",
+      "https://hanazono-rugby-site.com/",
+      "https://www.city.higashiosaka.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "東大阪市花園ラグビー場公式案内及びクラブ公式サイトより第1グラウンド本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j3-011",
+    "club_name": "奈良クラブ",
+    "venue_name": "奈良市鴻ノ池陸上競技場",
+    "latitude": 34.7011,
+    "longitude": 135.8272,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://naraclub.jp/stadium/",
+      "https://kounoike.sports.coocan.jp/",
+      "https://www.city.nara.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "奈良市公式施設情報及びクラブ公式サイトより陸上競技場ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j3-012",
+    "club_name": "ガイナーレ鳥取",
+    "venue_name": "鳥取市営サッカー場",
+    "latitude": 35.4578,
+    "longitude": 134.2217,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.gainare.co.jp/stadium/bird/",
+      "https://www.city.tottori.lg.jp/",
+      "https://www.city.tottori.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "鳥取市公式施設案内及びクラブ公式サイトよりサッカー場ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j3-013",
+    "club_name": "レノファ山口FC",
+    "venue_name": "維新百年記念公園陸上競技場",
+    "latitude": 34.1504,
+    "longitude": 131.4422,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.renofa.com/ishin_mirailife_stadium/",
+      "https://www.ishin100.com/",
+      "https://www.pref.yamaguchi.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "維新百年記念公園公式案内及びクラブ公式サイトより陸上競技場ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j3-014",
+    "club_name": "カマタマーレ讃岐",
+    "venue_name": "香川県立丸亀競技場",
+    "latitude": 34.2657,
+    "longitude": 133.7845,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.kamatamare.jp/game/stadium.php",
+      "https://marugame-stadium.jp/",
+      "https://www.pref.kagawa.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "香川県立丸亀競技場公式案内及びクラブ公式サイトより競技場本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j3-015",
+    "club_name": "愛媛FC",
+    "venue_name": "愛媛県総合運動公園陸上競技場",
+    "latitude": 33.7667,
+    "longitude": 132.7972,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://ehimefc.com/stadium",
+      "https://www.eparks.or.jp/",
+      "https://www.pref.ehime.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "愛媛県総合運動公園公式情報及びクラブ公式サイトより陸上競技場本体ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j3-016",
+    "club_name": "高知ユナイテッドSC",
+    "venue_name": "高知県立春野総合運動公園陸上競技場",
+    "latitude": 33.5111,
+    "longitude": 133.5027,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "http://kochi-usc.jp/club/stadium/",
+      "https://haruno-park.com/",
+      "https://www.pref.kochi.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "高知県立春野総合運動公園公式情報及びクラブ公式サイトより陸上競技場ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j3-017",
+    "club_name": "ギラヴァンツ北九州",
+    "venue_name": "北九州スタジアム",
+    "latitude": 33.8911,
+    "longitude": 130.8889,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://www.giravanz.jp/stadium/",
+      "https://www.kitakyushu-stadium.jp/",
+      "https://www.city.kitakyushu.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "北九州市公式施設情報及びスタジアム公式サイトより球技場本体中央位置を確認"
+  },
+  {
+    "question_id": "q-j3-018",
+    "club_name": "ロアッソ熊本",
+    "venue_name": "熊本県民総合運動公園陸上競技場",
+    "latitude": 32.8368,
+    "longitude": 130.8,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://roasso-k.com/game/stadium",
+      "https://www.kspa.or.jp/park/sougou/",
+      "https://www.pref.kumamoto.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "熊本県民総合運動公園公式情報及びクラブ公式サイトより陸上競技場本体ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j3-019",
+    "club_name": "鹿児島ユナイテッドFC",
+    "venue_name": "鹿児島県立鴨池陸上競技場",
+    "latitude": 31.5647,
+    "longitude": 130.5606,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://kufc.co.jp/stadium/",
+      "https://www.pref.kagoshima.jp/",
+      "https://www.city.kagoshima.lg.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "鹿児島県公式施設情報及びクラブ公式サイトより陸上競技場ピッチ中央位置を確認"
+  },
+  {
+    "question_id": "q-j3-020",
+    "club_name": "FC琉球",
+    "venue_name": "沖縄県総合運動公園陸上競技場",
+    "latitude": 26.3117,
+    "longitude": 127.8319,
+    "coordinate_status": "verified",
+    "venue_position_check": "ピッチ中央（フィールド中央）の座標を確認済み",
+    "source_urls": [
+      "https://fcryukyu.com/stadium/",
+      "https://okinawa-kenso.com/",
+      "https://www.pref.okinawa.jp/"
+    ],
+    "checked_at": "2026-11-08",
+    "note": "沖縄県総合運動公園公式サイト及びクラブ公式サイトより陸上競技場ピッチ中央位置を確認"
+  }
+]
