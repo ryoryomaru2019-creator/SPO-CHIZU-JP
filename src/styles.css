@@ -1716,23 +1716,30 @@ html, body {
    Result Screen Specifics
    ========================================================== */
 .stadium-badge {
-  background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+  background: linear-gradient(135deg, rgba(0, 229, 255, 0.12) 0%, rgba(17, 26, 48, 0.9) 100%);
+  border: 1px solid var(--neo-cyan);
+  border-left: 4px solid var(--neo-cyan);
   border-radius: var(--radius-md);
   padding: 14px;
-  border-left: 5px solid var(--color-accent-green);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.15);
 }
 
 .badge-sub {
   font-size: 0.78rem;
-  color: var(--color-primary);
+  color: var(--neo-cyan);
+  font-family: 'Share Tech Mono', monospace;
   font-weight: 700;
+  letter-spacing: 0.05em;
   display: block;
 }
 
 .stadium-name {
-  font-size: 1.25rem;
-  color: var(--color-primary-dark);
+  font-size: 1.35rem;
+  font-weight: 700;
+  font-family: 'Rajdhani', sans-serif;
+  color: #ffffff;
   margin-top: 4px;
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
 }
 
 .metrics-grid {
@@ -1772,36 +1779,41 @@ html, body {
 }
 
 .coords-detail-box {
-  background-color: #f8fafc;
+  background: rgba(12, 20, 38, 0.9);
+  border: 1px solid rgba(52, 120, 255, 0.35);
   border-radius: var(--radius-sm);
-  padding: 10px 12px;
+  padding: 12px 14px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   font-size: 0.82rem;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 .coords-row {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 }
 
 .user-dot {
-  color: #e74c3c;
+  color: #00E5FF;
 }
 
 .correct-dot {
-  color: #2ecc71;
+  color: #35F28A;
 }
 
 .dot-label {
-  color: var(--color-text-muted);
+  color: #91A4C2;
+  font-weight: 600;
+  min-width: 90px;
 }
 
 .dot-coords {
-  color: var(--color-text-main);
-  font-family: monospace;
+  color: #00E5FF;
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 0.04em;
 }
 
 .result-actions {
@@ -1816,72 +1828,93 @@ html, body {
    Google Maps Links Component
    ========================================================== */
 .google-maps-links-container {
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  background: linear-gradient(180deg, rgba(17, 26, 48, 0.92) 0%, rgba(11, 19, 36, 0.96) 100%);
+  border: 1px solid rgba(0, 229, 255, 0.35);
   border-radius: var(--radius-md);
-  padding: 14px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(0, 229, 255, 0.04);
 }
 
 .links-header .links-title {
-  font-size: 0.92rem;
-  color: var(--color-primary-dark);
+  font-size: 0.95rem;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #00E5FF;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
 }
 
 .links-caution {
   font-size: 0.75rem;
-  color: #64748b;
+  color: #91A4C2;
   margin-top: 4px;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .links-two-choice-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .maps-location-card {
   border-radius: var(--radius-sm);
-  padding: 10px 12px;
+  padding: 12px 14px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  border: 1px solid #e2e8f0;
+  gap: 10px;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(52, 120, 255, 0.3);
 }
 
 .maps-location-card.correct-card {
-  background-color: rgba(240, 253, 244, 0.5);
-  border-color: #bbf7d0;
+  background: rgba(10, 26, 32, 0.85);
+  border: 1px solid rgba(53, 242, 138, 0.35);
+  border-left: 4px solid #35F28A;
+  box-shadow: 0 0 12px rgba(53, 242, 138, 0.08);
 }
 
 .maps-location-card.user-card {
-  background-color: rgba(254, 242, 242, 0.5);
-  border-color: #fecaca;
+  background: rgba(10, 22, 40, 0.85);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  border-left: 4px solid #00E5FF;
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.08);
 }
 
 .location-card-title {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 0.82rem;
+  gap: 8px;
+  font-size: 0.88rem;
+  font-family: 'Rajdhani', sans-serif;
   font-weight: 700;
-  color: #1e293b;
+  letter-spacing: 0.04em;
+}
+
+.correct-card .location-card-title {
+  color: #35F28A;
+  text-shadow: 0 0 8px rgba(53, 242, 138, 0.4);
+}
+
+.user-card .location-card-title {
+  color: #00E5FF;
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
 }
 
 .location-card-title .loc-icon {
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 .two-choice-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 10px;
 }
 
 .choice-btn {
@@ -1889,57 +1922,68 @@ html, body {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 9px 8px;
-  border-radius: var(--radius-sm);
-  font-size: 0.86rem;
+  padding: 10px 10px;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  font-family: 'Rajdhani', sans-serif;
   font-weight: 700;
+  letter-spacing: 0.05em;
   text-decoration: none;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   white-space: nowrap;
 }
 
 .choice-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
 .choice-btn:active {
   transform: translateY(0);
 }
 
-/* 左側：周辺マップ */
+/* 左側：周辺マップ (Neon Cyan 枠線ボタン) */
 .choice-btn.map-choice-btn {
-  background-color: #ffffff;
-  color: #0369a1;
-  border: 1.5px solid #7dd3fc;
+  background: rgba(0, 229, 255, 0.1);
+  color: #00E5FF;
+  border: 1.5px solid #00E5FF;
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.15);
 }
 
 .choice-btn.map-choice-btn:hover {
-  background-color: #f0f9ff;
-  border-color: #38bdf8;
+  background: #00E5FF;
+  color: #070B17;
+  border-color: #00E5FF;
+  box-shadow: 0 0 18px rgba(0, 229, 255, 0.7);
 }
 
-/* 右側：ストリートビュー（正解地点） */
+/* 右側：ストリートビュー（正解地点: Neon Green 枠線ボタン） */
 .correct-card .choice-btn.sv-choice-btn {
-  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
-  color: #ffffff;
-  border: 1.5px solid #15803d;
+  background: rgba(53, 242, 138, 0.12);
+  color: #35F28A;
+  border: 1.5px solid #35F28A;
+  box-shadow: 0 0 8px rgba(53, 242, 138, 0.15);
 }
 
 .correct-card .choice-btn.sv-choice-btn:hover {
-  background: linear-gradient(135deg, #15803d 0%, #14532d 100%);
+  background: #35F28A;
+  color: #070B17;
+  border-color: #35F28A;
+  box-shadow: 0 0 18px rgba(53, 242, 138, 0.7);
 }
 
-/* 右側：ストリートビュー（回答地点） */
+/* 右側：ストリートビュー（回答地点: Neon Pink 枠線ボタン） */
 .user-card .choice-btn.sv-choice-btn {
-  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-  color: #ffffff;
-  border: 1.5px solid #dc2626;
+  background: rgba(255, 61, 129, 0.12);
+  color: #FF3D81;
+  border: 1.5px solid #FF3D81;
+  box-shadow: 0 0 8px rgba(255, 61, 129, 0.15);
 }
 
 .user-card .choice-btn.sv-choice-btn:hover {
-  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  background: #FF3D81;
+  color: #ffffff;
+  border-color: #FF3D81;
+  box-shadow: 0 0 18px rgba(255, 61, 129, 0.7);
 }
 
 .choice-btn .btn-icon {
@@ -1947,7 +1991,7 @@ html, body {
 }
 
 .choice-btn .btn-text {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
 }
 
 /* Confirm Modal */
@@ -3627,48 +3671,60 @@ html, body {
   color: var(--geo-text-bright) !important;
 }
 
-/* ネオングリーン ピル型ボタン（GeoGuessrスタイル） */
+/* サイバーパンク ネオンボタン（Cyber HUDスタイル） */
 .geoguessr-neon-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  color: #ffffff;
+  gap: 12px;
+  position: relative;
+  background: linear-gradient(135deg, rgba(53, 242, 138, 0.22) 0%, rgba(0, 229, 255, 0.22) 100%);
+  color: #35F28A;
+  font-family: 'Orbitron', 'Rajdhani', sans-serif;
   font-weight: 800;
-  font-size: 1.05rem;
-  padding: 13px 28px;
-  border: none;
-  border-radius: 9999px;
+  font-size: 1.12rem;
+  letter-spacing: 0.08em;
+  padding: 14px 28px;
+  border: 2px solid #35F28A;
+  border-radius: 4px;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
   cursor: pointer;
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.42);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 16px rgba(53, 242, 138, 0.35), inset 0 0 12px rgba(53, 242, 138, 0.15);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-shadow: 0 0 8px rgba(53, 242, 138, 0.6);
+  text-transform: uppercase;
 }
 
 .geoguessr-neon-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+  background: linear-gradient(135deg, #35F28A 0%, #00E5FF 100%);
+  color: #070B17;
+  border-color: #00E5FF;
   transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 26px rgba(52, 211, 153, 0.55);
+  box-shadow: 0 0 30px rgba(53, 242, 138, 0.8), 0 0 50px rgba(0, 229, 255, 0.5);
+  text-shadow: none;
 }
 
 .geoguessr-neon-btn:active:not(:disabled) {
   transform: translateY(0) scale(0.99);
+  box-shadow: 0 0 15px rgba(53, 242, 138, 0.6);
 }
 
 .geoguessr-neon-btn:disabled {
-  opacity: 0.5;
+  opacity: 0.4;
   cursor: not-allowed;
-  filter: grayscale(0.5);
+  filter: grayscale(0.8);
   box-shadow: none;
+  border-color: #64748b;
+  color: #94a3b8;
 }
 
 .geoguessr-neon-btn .btn-badge {
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.35);
   padding: 3px 10px;
-  border-radius: 999px;
+  border-radius: 2px;
   font-size: 0.85rem;
   font-weight: 700;
+  border: 1px solid rgba(53, 242, 138, 0.5);
 }
 
 /* ==========================================================================
@@ -4574,7 +4630,10 @@ html, body {
 
 .keyboard-hint-sub {
   font-size: 0.75rem;
-  color: var(--geo-text-muted);
+  color: #00E5FF;
+  font-family: 'Share Tech Mono', monospace;
+  letter-spacing: 0.04em;
+  opacity: 0.85;
 }
 
 /* 最終結果 世界ランキング登録カード */
