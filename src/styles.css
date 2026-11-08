@@ -444,13 +444,15 @@ html, body {
   height: calc(100vh - 22px);
 }
 
-/* タイトル画面では全体を快適にスクロールできるようにする */
-.main-content.start-screen-active {
+/* タイトル画面・リザルト画面では全体を快適にスクロールできるようにする */
+.main-content.start-screen-active,
+.main-content.final-screen-active {
   overflow-y: auto !important;
   overflow-x: hidden !important;
 }
 
-.main-content.has-collapsed-header.start-screen-active {
+.main-content.has-collapsed-header.start-screen-active,
+.main-content.has-collapsed-header.final-screen-active {
   height: calc(100vh - 22px);
 }
 
@@ -2066,31 +2068,41 @@ html, body {
 /* ==========================================================
    Final Screen (Cyber Dark Geoguessr Theme)
    ========================================================== */
+.screen-container.final-screen,
 .final-screen {
-  max-width: 920px;
+  max-width: 960px;
   width: 100%;
   margin: 0 auto;
-  max-height: calc(100vh - 70px);
-  overflow-y: auto;
-  padding-right: 4px;
+  align-items: flex-start !important; /* ★上揃えを強制！ヘッダー裏への突き抜け防止 */
+  justify-content: flex-start !important;
+  min-height: min-content;
+  max-height: none !important;
+  height: auto !important;
+  overflow-y: visible;
+  padding: 24px 16px 100px 16px !important;
+  box-sizing: border-box !important;
 }
 
 /* カスタムサイバースクロールバー */
+.main-content.final-screen-active::-webkit-scrollbar,
 .final-screen::-webkit-scrollbar {
   width: 8px;
 }
 
+.main-content.final-screen-active::-webkit-scrollbar-track,
 .final-screen::-webkit-scrollbar-track {
   background: rgba(6, 11, 24, 0.9);
   border-radius: 4px;
 }
 
+.main-content.final-screen-active::-webkit-scrollbar-thumb,
 .final-screen::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, #00E5FF 0%, #0088cc 100%);
   border-radius: 4px;
   box-shadow: 0 0 8px rgba(0, 229, 255, 0.6);
 }
 
+.main-content.final-screen-active::-webkit-scrollbar-thumb:hover,
 .final-screen::-webkit-scrollbar-thumb:hover {
   background: #00E5FF;
   box-shadow: 0 0 12px rgba(0, 229, 255, 0.9);

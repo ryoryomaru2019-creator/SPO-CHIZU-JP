@@ -599,7 +599,7 @@ export const App: React.FC = () => {
         </div>
       )}
 
-      <main className={`main-content ${!isHeaderOpen ? 'has-collapsed-header' : ''} ${currentView === 'game' && currentScreen === 'start' ? 'start-screen-active' : ''}`}>
+      <main className={`main-content ${!isHeaderOpen ? 'has-collapsed-header' : ''} ${currentView === 'game' && currentScreen === 'start' ? 'start-screen-active' : ''} ${currentView === 'game' && currentScreen === 'final' ? 'final-screen-active' : ''}`}>
         {/* 管理画面ビュー */}
         {currentView === 'admin' && (
           <AdminQuestionsPage

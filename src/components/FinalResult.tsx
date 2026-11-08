@@ -87,6 +87,22 @@ export const FinalResult: React.FC<FinalResultProps> = ({
 
   useEffect(() => {
     loadRankings();
+    // Result画面表示時に確実に先頭（ゲーム終了タイトル）へスクロール
+    if (typeof window !== 'undefined' && typeof window.scrollTo === 'function') {
+      try {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } catch {
+        // ignore in test environments
+      }
+    }
+    const mainEl = document.querySelector('.main-content');
+    if (mainEl && typeof mainEl.scrollTo === 'function') {
+      try {
+        mainEl.scrollTo({ top: 0, behavior: 'instant' });
+      } catch {
+        // ignore in test environments
+      }
+    }
   }, []);
 
   const handleDeleteMyScore = async (rankingId: string, score: number) => {
