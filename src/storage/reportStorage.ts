@@ -1,3 +1,4 @@
+import { Coordinates } from '../types/game';
 import { QuestionReport, QuestionReportInput, ReportStatus } from '../types/report';
 import { getStoredQuestions, updateQuestion } from './questionStorage';
 import { getRankingApiUrl } from '../services/rankingService';
@@ -168,4 +169,35 @@ export function applyReportToQuestion(reportId: string): { success: boolean; mes
     success: true,
     message: `問題「${question.title}」に座標修正（北緯 ${report.reportedCoordinates.latitude.toFixed(6)}°, 東経 ${report.reportedCoordinates.longitude.toFixed(6)}°）${report.reportedName ? `および名称「${report.reportedName}」` : ''}を適用しました！`,
   };
+}
+
+/**
+ * 報告内容（座標・名称・URL・コメント等）を編集・更新
+ */
+export function updateReportContent(
+  id: string,
+  data: {
+    reportedCoordinates?: Coordinates;
+    reportedName?: string;
+    comment?: string;
+    evidenceUrl?: string;
+    status?: ReportStatus;
+  }
+): QuestionReport[] {
+  const reports = getStoredReports();
+  const now = new Date().toISOString();
+  const updated = reports.map((r) => {
+    if (r.id !== id) return r;
+    return {
+      ...r,
+      reportedCoordinates: data.reportedCoordinates || r.reportedCoordinates,
+      reportedName: data.reportedName !== undefined ? data.reportedName : r.reportedName,
+      comment: data.comment !== undefined ? data.comment : r.comment,
+      evidenceUrl: data.evidenceUrl !== undefined ? data.evidenceUrl : r.evidenceUrl,
+      status: data.status || r.status,
+      updatedAt: now,
+    };
+  });
+  setStoredReports(updated);
+  return updated;
 }

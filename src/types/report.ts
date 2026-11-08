@@ -1,6 +1,6 @@
 import { Coordinates } from './game';
 
-export type ReportStatus = 'pending' | 'applied' | 'rejected';
+export type ReportStatus = 'pending' | 'applied' | 'rejected' | 'on_hold';
 
 export interface QuestionReport {
   id: string;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Category, Difficulty, Question } from '../types/game';
-import { isValidCoordinates } from '../utils/coordinates';
+import { isValidCoordinates, parseCoordinatesString } from '../utils/coordinates';
 import {
   safeCreateGoogleMapSearchUrl,
   safeCreateGoogleStreetViewUrl,
@@ -31,7 +31,52 @@ export const QuestionEditor: React.FC<QuestionEditorProps> = ({
   const [tags, setTags] = useState(initialQuestion?.tags?.join(', ') || '');
   const [latitude, setLatitude] = useState(initialQuestion ? String(initialQuestion.answer.latitude) : '');
   const [longitude, setLongitude] = useState(initialQuestion ? String(initialQuestion.answer.longitude) : '');
+  const [pasteCoordsInput, setPasteCoordsInput] = useState('');
+  const [pasteSuccessNotice, setPasteSuccessNotice] = useState<string | null>(null);
   const [isPublished, setIsPublished] = useState(initialQuestion ? initialQuestion.isPublished : true);
+
+  // Googleマップ等からの座標一括貼り付け処理
+  const handleApplyPastedCoords = (rawText: string) => {
+    const parsed = parseCoordinatesString(rawText);
+    if (parsed) {
+      setLatitude(String(parsed.latitude));
+      setLongitude(String(parsed.longitude));
+      setPasteCoordsInput('');
+      setPasteSuccessNotice(`座標を反映しました: [${parsed.latitude}, ${parsed.longitude}]`);
+      setTimeout(() => setPasteSuccessNotice(null), 3000);
+      setErrors((prev) => {
+        const next = { ...prev };
+        delete next.latitude;
+        delete next.longitude;
+        return next;
+      });
+      return true;
+    }
+    return false;
+  };
+
+  const handleClipboardPaste = async () => {
+    try {
+      if (navigator.clipboard && navigator.clipboard.readText) {
+        const text = await navigator.clipboard.readText();
+        if (text && handleApplyPastedCoords(text)) {
+          return;
+        }
+      }
+      alert('クリップボードから有効な座標を読み取れませんでした。入力欄に直接ペーストしてください。');
+    } catch {
+      alert('クリップボードの読み取り権限が拒否されました。入力枠に直接貼り付けてください。');
+    }
+  };
+
+  const handleFieldPaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    const text = e.clipboardData.getData('text');
+    if (text && text.includes(',')) {
+      if (handleApplyPastedCoords(text)) {
+        e.preventDefault();
+      }
+    }
+  };
 
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -217,6 +262,45 @@ export const QuestionEditor: React.FC<QuestionEditorProps> = ({
               </select>
             </div>
 
+            {/* Googleマップ座標の一括貼り付け */}
+            <div className="form-field full-width paste-coords-section">
+              <label htmlFor="q-coords-paste" className="form-label">
+                📋 Googleマップ座標の一括貼付（自動分割）
+              </label>
+              <div className="google-coords-paste-box">
+                <input
+                  id="q-coords-paste"
+                  type="text"
+                  className="form-input"
+                  value={pasteCoordsInput}
+                  onChange={(e) => {
+                    setPasteCoordsInput(e.target.value);
+                    if (e.target.value.includes(',')) {
+                      handleApplyPastedCoords(e.target.value);
+                    }
+                  }}
+                  onPaste={(e) => {
+                    const text = e.clipboardData.getData('text');
+                    if (text && handleApplyPastedCoords(text)) {
+                      e.preventDefault();
+                    }
+                  }}
+                  placeholder="例: 35.695957, 139.682124 (Googleマップの「座標をコピー」をペースト)"
+                />
+                <button
+                  type="button"
+                  className="neo-action-btn clipboard-paste-btn"
+                  onClick={handleClipboardPaste}
+                  title="クリップボードから座標を読み取って自動入力"
+                >
+                  📋 貼付
+                </button>
+              </div>
+              {pasteSuccessNotice && (
+                <div className="paste-success-notice">{pasteSuccessNotice}</div>
+              )}
+            </div>
+
             {/* 緯度・経度 */}
             <div className="form-field">
               <label htmlFor="q-lat" className="form-label required">
@@ -228,6 +312,7 @@ export const QuestionEditor: React.FC<QuestionEditorProps> = ({
                 className={`form-input ${errors.latitude ? 'is-invalid' : ''}`}
                 value={latitude}
                 onChange={(e) => setLatitude(e.target.value)}
+                onPaste={handleFieldPaste}
                 placeholder="例: 34.8026"
               />
               {errors.latitude && <span className="field-error">{errors.latitude}</span>}
@@ -243,6 +328,7 @@ export const QuestionEditor: React.FC<QuestionEditorProps> = ({
                 className={`form-input ${errors.longitude ? 'is-invalid' : ''}`}
                 value={longitude}
                 onChange={(e) => setLongitude(e.target.value)}
+                onPaste={handleFieldPaste}
                 placeholder="例: 135.5383"
               />
               {errors.longitude && <span className="field-error">{errors.longitude}</span>}
