@@ -8524,3 +8524,414 @@ html, body {
   white-space: nowrap;
 }
 
+/* ==========================================================
+   タイトル画面: プレイヤー名設定バー（華麗にヒラメいた！仕様）
+   ========================================================== */
+.title-player-profile-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 8px 16px;
+  margin-top: 10px;
+  background: rgba(17, 26, 48, 0.7);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+}
+
+.profile-id-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 229, 255, 0.1);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.76rem;
+}
+
+.profile-id-chip .chip-label {
+  color: var(--neo-text-sub);
+  font-weight: 600;
+}
+
+.profile-id-chip .chip-code {
+  color: #00E5FF;
+  font-family: 'Share Tech Mono', monospace;
+  font-weight: 800;
+}
+
+.player-name-display-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+}
+
+.profile-name-label {
+  color: var(--neo-text-sub);
+  font-weight: 600;
+}
+
+.profile-player-name {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 800;
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.4);
+}
+
+.player-name-edit-btn {
+  background: rgba(0, 229, 255, 0.12);
+  border: 1px solid #00E5FF;
+  color: #00E5FF;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.player-name-edit-btn:hover {
+  background: #00E5FF;
+  color: #070B17;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+.name-saved-toast {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #35F28A;
+  margin-left: 4px;
+}
+
+.player-name-edit-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.player-name-inline-input {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  font-weight: 700;
+  border: 1px solid #00E5FF;
+  border-radius: 4px;
+  padding: 4px 10px;
+  font-size: 0.88rem;
+  width: 170px;
+}
+
+.player-name-save-btn {
+  background: #16a34a;
+  color: #ffffff;
+  border: 1px solid #22c55e;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.player-name-cancel-btn {
+  background: #334155;
+  color: #ffffff;
+  border: 1px solid #475569;
+  font-size: 0.78rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* ==========================================================
+   Result画面: 世界ランキング表示 ＆ ユーザー自己スコア削除
+   ========================================================== */
+.final-world-rankings-box {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.world-rankings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.world-rankings-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #00E5FF;
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+}
+
+.rankings-subtitle-note {
+  display: block;
+  font-size: 0.76rem;
+  color: var(--neo-text-sub);
+  margin-top: 2px;
+}
+
+.rankings-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sync-status-indicator {
+  font-size: 0.75rem;
+  color: #91A4C2;
+}
+
+.sync-status-indicator.online {
+  color: #35F28A;
+}
+
+.refresh-rankings-btn {
+  background: rgba(0, 229, 255, 0.12);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  color: #00E5FF;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.refresh-rankings-btn:hover {
+  background: #00E5FF;
+  color: #070B17;
+}
+
+.no-rankings-placeholder {
+  text-align: center;
+  padding: 24px;
+  color: var(--neo-text-sub);
+  font-size: 0.9rem;
+}
+
+.rankings-table-wrapper {
+  overflow-x: auto;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  background: rgba(11, 19, 36, 0.6);
+}
+
+.final-rankings-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.final-rankings-table th {
+  background: rgba(17, 26, 48, 0.9);
+  color: #00E5FF !important;
+  -webkit-text-fill-color: #00E5FF !important;
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(0, 229, 255, 0.25);
+  white-space: nowrap;
+}
+
+.final-rankings-table td {
+  padding: 9px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: #EAF2FF;
+  white-space: nowrap;
+}
+
+.final-rankings-table tr.ranking-row:hover {
+  background: rgba(0, 229, 255, 0.05);
+}
+
+/* 自分のスコア行のハイライト（華麗にヒラメいた！風） */
+.final-rankings-table tr.ranking-row.my-score-row {
+  background: rgba(0, 229, 255, 0.12) !important;
+  border-left: 3px solid #00E5FF;
+}
+
+.final-rankings-table tr.ranking-row.my-score-row td {
+  font-weight: 700;
+}
+
+.my-score-badge {
+  display: inline-block;
+  background: #00E5FF;
+  color: #070B17;
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 10px;
+  margin-left: 6px;
+}
+
+.rank-cell {
+  font-weight: 800;
+  color: #FFE45C;
+}
+
+.final-rankings-table tr.rank-1 .rank-cell {
+  color: #FFE45C;
+  font-size: 0.95rem;
+}
+
+.final-rankings-table tr.rank-2 .rank-cell {
+  color: #E2E8F0;
+  font-size: 0.9rem;
+}
+
+.final-rankings-table tr.rank-3 .rank-cell {
+  color: #FDBA74;
+  font-size: 0.9rem;
+}
+
+.score-cell strong {
+  color: #35F28A;
+  font-size: 0.95rem;
+}
+
+.delete-my-score-btn {
+  background: rgba(255, 61, 129, 0.15);
+  border: 1px solid rgba(255, 61, 129, 0.4);
+  color: #FF3D81;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.delete-my-score-btn:hover {
+  background: #FF3D81;
+  color: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 61, 129, 0.6);
+}
+
+.no-action-label {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+/* ==========================================================
+   管理ツール: 🏆 世界ランキング管理（AdminRankingsManager）
+   ========================================================== */
+.admin-rankings-manager {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rankings-manager-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 12px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  padding: 18px 22px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.rankings-header-info h2 {
+  margin: 0 0 6px 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a !important;
+}
+
+.rankings-header-desc {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #475569 !important;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.api-url-indicator {
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+}
+
+.api-url-indicator .api-label {
+  color: #64748b !important;
+  font-weight: 700;
+}
+
+.api-url-indicator .api-code {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: #0f172a !important;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.74rem;
+  word-break: break-all;
+}
+
+.rankings-table-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.rankings-admin-table td {
+  color: #0f172a !important;
+  vertical-align: middle;
+}
+
+.rank-cell-admin {
+  font-weight: 800;
+  color: #0f172a !important;
+  text-align: center;
+}
+
+.player-name-bold {
+  color: #0f172a !important;
+  font-size: 0.92rem;
+}
+
+.score-val-bold {
+  color: #15803d !important;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+
+.player-id-code {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.76rem;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: #475569 !important;
+}
+
+.actions-cell-admin {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.score-edit-modal {
+  max-width: 620px;
+}
+
+

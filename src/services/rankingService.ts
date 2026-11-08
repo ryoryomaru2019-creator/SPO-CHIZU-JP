@@ -13,6 +13,7 @@ export interface RankingEntry {
   categoryName: string;
   difficulty: string;
   playedAt: string;
+  playerId?: string;
 }
 
 export const DEFAULT_GAS_API_URL =
@@ -185,7 +186,19 @@ export function getLocalRankings(limit = 10, mode = 'all'): RankingEntry[] {
     });
 
     entries.sort((a, b) => b.totalScore - a.totalScore);
-    return entries.slice(0, limit).map((e, idx) => ({ ...e, rank: idx + 1 }));
+
+    // ★各ユーザー上位3件（ベスト3）までにフィルタリング
+    const userCountMap: Record<string, number> = {};
+    const deduplicatedEntries: RankingEntry[] = [];
+    for (const e of entries) {
+      const userKey = e.playerId || e.playerName;
+      userCountMap[userKey] = (userCountMap[userKey] || 0) + 1;
+      if (userCountMap[userKey] <= 3) {
+        deduplicatedEntries.push(e);
+      }
+    }
+
+    return deduplicatedEntries.slice(0, limit).map((e, idx) => ({ ...e, rank: idx + 1 }));
   } catch (e) {
     return [];
   }
@@ -229,6 +242,47 @@ export async function fetchRankings(limit = 20, mode = 'all'): Promise<{
   return {
     isOnline: false,
     rankings: getLocalRankings(limit, mode),
+  };
+}
+
+/**
+ * 管理者用：世界ランキングの全件取得（ベスト3制限なし）
+ */
+export async function fetchAdminRankings(): Promise<{
+  isOnline: boolean;
+  rankings: RankingEntry[];
+}> {
+  const apiUrl = getRankingApiUrl();
+  if (!apiUrl) {
+    return {
+      isOnline: false,
+      rankings: getLocalRankings(500, 'all'),
+    };
+  }
+
+  try {
+    const sep = apiUrl.includes('?') ? '&' : '?';
+    const res = await fetch(`${apiUrl}${sep}action=getAllRankings&_t=${Date.now()}`, {
+      method: 'GET',
+      mode: 'cors',
+    });
+
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+
+    if (data.status === 'ok' && Array.isArray(data.rankings)) {
+      return {
+        isOnline: true,
+        rankings: data.rankings,
+      };
+    }
+  } catch (err) {
+    console.warn('[RankingService] Failed to fetch admin rankings:', err);
+  }
+
+  return {
+    isOnline: false,
+    rankings: getLocalRankings(100, 'all'),
   };
 }
 
@@ -313,5 +367,125 @@ export async function submitScore(payload: {
   }
 
   return { success: false, isOnline: false, message: '登録に失敗しました' };
+}
+
+/**
+ * スコア削除処理（ユーザー自身の削除 or 管理者による削除）
+ */
+export async function deleteScore(
+  id: string,
+  playerId = getPlayerUniqueId(),
+  isAdmin = false
+): Promise<{ success: boolean; message: string }> {
+  const apiUrl = getRankingApiUrl();
+  if (!apiUrl) {
+    return { success: false, message: 'API連携URLが設定されていません' };
+  }
+
+  const payload = {
+    action: 'deleteScore',
+    id,
+    playerId,
+    isAdmin,
+  };
+
+  // 1. POST試行
+  try {
+    const res = await fetch(apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload),
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.status === 'ok') {
+        return { success: true, message: data.message || 'スコアを削除しました' };
+      }
+      return { success: false, message: data.message || '削除に失敗しました' };
+    }
+  } catch (postErr) {
+    console.warn('[RankingService] POST deleteScore failed, trying GET fallback...', postErr);
+  }
+
+  // 2. GETフォールバック
+  try {
+    const encoded = encodeURIComponent(JSON.stringify(payload));
+    const sep = apiUrl.includes('?') ? '&' : '?';
+    const res = await fetch(`${apiUrl}${sep}action=deleteScore&data=${encoded}&_t=${Date.now()}`, {
+      method: 'GET',
+      mode: 'cors',
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.status === 'ok') {
+        return { success: true, message: data.message || 'スコアを削除しました' };
+      }
+      return { success: false, message: data.message || '削除に失敗しました' };
+    }
+  } catch (getErr: any) {
+    console.error('[RankingService] GET deleteScore failed:', getErr);
+    return { success: false, message: `通信エラー: ${getErr.message || String(getErr)}` };
+  }
+
+  return { success: false, message: '削除できませんでした' };
+}
+
+/**
+ * スコア更新処理（管理者による編集）
+ */
+export async function updateScore(
+  entry: Partial<RankingEntry> & { id: string },
+  isAdmin = true
+): Promise<{ success: boolean; message: string }> {
+  const apiUrl = getRankingApiUrl();
+  if (!apiUrl) {
+    return { success: false, message: 'API連携URLが設定されていません' };
+  }
+
+  const payload = {
+    action: 'updateScore',
+    isAdmin,
+    ...entry,
+  };
+
+  // 1. POST試行
+  try {
+    const res = await fetch(apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload),
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.status === 'ok') {
+        return { success: true, message: data.message || 'スコアを更新しました' };
+      }
+      return { success: false, message: data.message || '更新に失敗しました' };
+    }
+  } catch (postErr) {
+    console.warn('[RankingService] POST updateScore failed, trying GET fallback...', postErr);
+  }
+
+  // 2. GETフォールバック
+  try {
+    const encoded = encodeURIComponent(JSON.stringify(payload));
+    const sep = apiUrl.includes('?') ? '&' : '?';
+    const res = await fetch(`${apiUrl}${sep}action=updateScore&data=${encoded}&_t=${Date.now()}`, {
+      method: 'GET',
+      mode: 'cors',
+    });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.status === 'ok') {
+        return { success: true, message: data.message || 'スコアを更新しました' };
+      }
+      return { success: false, message: data.message || '更新に失敗しました' };
+    }
+  } catch (getErr: any) {
+    console.error('[RankingService] GET updateScore failed:', getErr);
+    return { success: false, message: `通信エラー: ${getErr.message || String(getErr)}` };
+  }
+
+  return { success: false, message: '更新できませんでした' };
 }
 

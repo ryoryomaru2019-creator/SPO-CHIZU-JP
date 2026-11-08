@@ -11,6 +11,11 @@ import {
 } from '../utils/questionFilter';
 import { QuestionFilterPanel } from './QuestionFilterPanel';
 import { TopPlayersPanel } from './TopPlayersPanel';
+import {
+  getLastPlayerName,
+  savePlayerName,
+  getPlayerUniqueId,
+} from '../services/rankingService';
 import categoriesData from '../data/categories.json';
 
 interface StartScreenProps {
@@ -40,6 +45,24 @@ export const StartScreen: React.FC<StartScreenProps> = ({
     initialMode.questionCount || 5
   );
   const [shuffle, setShuffle] = useState<boolean>(initialMode.shuffle !== false);
+
+  // プレイヤー名設定ステート（「華麗にヒラメいた！」風）
+  const [playerName, setPlayerName] = useState<string>(() => getLastPlayerName());
+  const [playerId] = useState<string>(() => getPlayerUniqueId());
+  const [isEditingName, setIsEditingName] = useState<boolean>(false);
+  const [tempName, setTempName] = useState<string>(playerName);
+  const [nameSavedNotice, setNameSavedNotice] = useState<boolean>(false);
+
+  const handleSaveName = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    const clean = tempName.trim();
+    if (!clean) return;
+    savePlayerName(clean);
+    setPlayerName(clean);
+    setIsEditingName(false);
+    setNameSavedNotice(true);
+    setTimeout(() => setNameSavedNotice(false), 2500);
+  };
 
   // 現在の条件に一致する問題一覧
   const matchingQuestions = useMemo(() => {
@@ -117,6 +140,60 @@ export const StartScreen: React.FC<StartScreenProps> = ({
             <div className="start-top-players-box">
               <TopPlayersPanel initialOpen={false} />
             </div>
+          </div>
+
+          {/* プレイヤー名設定バー（華麗にヒラメいた！風） */}
+          <div className="title-player-profile-bar">
+            <div className="profile-id-chip" title="端末固有のプレイヤーID（自動識別）">
+              <span className="chip-label">ID:</span>
+              <strong className="chip-code">{playerId}</strong>
+            </div>
+
+            {isEditingName ? (
+              <form onSubmit={handleSaveName} className="player-name-edit-form">
+                <span className="profile-user-icon" aria-hidden="true">👤</span>
+                <input
+                  type="text"
+                  className="player-name-inline-input"
+                  value={tempName}
+                  onChange={(e) => setTempName(e.target.value)}
+                  placeholder="プレイヤー名"
+                  maxLength={16}
+                  autoFocus
+                />
+                <button type="submit" className="player-name-save-btn">
+                  ✓ 保存
+                </button>
+                <button
+                  type="button"
+                  className="player-name-cancel-btn"
+                  onClick={() => {
+                    setTempName(playerName);
+                    setIsEditingName(false);
+                  }}
+                >
+                  ✕
+                </button>
+              </form>
+            ) : (
+              <div className="player-name-display-group">
+                <span className="profile-user-icon" aria-hidden="true">👤</span>
+                <span className="profile-name-label">プレイヤー名:</span>
+                <strong className="profile-player-name">{playerName}</strong>
+                <button
+                  type="button"
+                  className="player-name-edit-btn"
+                  onClick={() => {
+                    setTempName(playerName);
+                    setIsEditingName(true);
+                  }}
+                  title="プレイヤー名を変更"
+                >
+                  ✏️ 変更
+                </button>
+                {nameSavedNotice && <span className="name-saved-toast">保存しました！</span>}
+              </div>
+            )}
           </div>
         </header>
 

@@ -11,6 +11,7 @@ import {
   RankingEntry,
   getRankingApiUrl,
   getPlayerUniqueId,
+  deleteScore,
 } from '../services/rankingService';
 
 interface FinalResultProps {
@@ -44,6 +45,8 @@ export const FinalResult: React.FC<FinalResultProps> = ({
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [topRankings, setTopRankings] = useState<RankingEntry[]>([]);
   const [isOnline, setIsOnline] = useState<boolean>(false);
+  const [isLoadingRankings, setIsLoadingRankings] = useState<boolean>(false);
+  const [isDeletingScoreId, setIsDeletingScoreId] = useState<string | null>(null);
 
   // 問題ごとの結果カード 折り畳み管理 (初期は全折り畳み、または1問目だけ展開)
   const [expandedIndices, setExpandedIndices] = useState<Set<number>>(new Set([0]));
@@ -71,12 +74,45 @@ export const FinalResult: React.FC<FinalResultProps> = ({
 
   const hasApiConfigured = Boolean(getRankingApiUrl());
 
-  useEffect(() => {
-    fetchRankings(5).then((res) => {
+  const loadRankings = async () => {
+    setIsLoadingRankings(true);
+    try {
+      const res = await fetchRankings(20);
       setTopRankings(res.rankings);
       setIsOnline(res.isOnline);
-    });
+    } finally {
+      setIsLoadingRankings(false);
+    }
+  };
+
+  useEffect(() => {
+    loadRankings();
   }, []);
+
+  const handleDeleteMyScore = async (rankingId: string, score: number) => {
+    if (
+      !window.confirm(
+        `世界ランキングからあなたのスコア（${score.toLocaleString()}点）を削除しますか？\n※この操作は取り消せません。`
+      )
+    ) {
+      return;
+    }
+
+    try {
+      setIsDeletingScoreId(rankingId);
+      const res = await deleteScore(rankingId, playerUniqueId);
+      if (res.success) {
+        setSubmitMessage({ text: '世界ランキングからあなたのスコアを削除しました。' });
+        await loadRankings();
+      } else {
+        alert(`削除に失敗しました: ${res.message}`);
+      }
+    } catch (err: any) {
+      alert(`削除エラー: ${err.message || String(err)}`);
+    } finally {
+      setIsDeletingScoreId(null);
+    }
+  };
 
   const handleSubmitScore = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -102,8 +138,7 @@ export const FinalResult: React.FC<FinalResultProps> = ({
         setIsSubmitted(true);
         setSubmitMessage({ text: res.message });
         // 最新ランキングを再取得
-        const updated = await fetchRankings(5);
-        setTopRankings(updated.rankings);
+        await loadRankings();
       } else {
         setSubmitMessage({ text: res.message, isError: true });
       }
@@ -203,19 +238,107 @@ export const FinalResult: React.FC<FinalResultProps> = ({
               </div>
             )}
 
-            {/* トッププレイヤー簡易プレビュー */}
-            {topRankings.length > 0 && (
-              <div className="top-rankings-preview">
-                <span className="preview-title">👑 現在のトップスコア:</span>
-                <div className="preview-badges">
-                  {topRankings.slice(0, 3).map((r, i) => (
-                    <span key={r.id || i} className="preview-chip">
-                      #{r.rank || i + 1} {r.playerName} (<strong>{r.totalScore.toLocaleString()}</strong>点)
-                    </span>
-                  ))}
+            {/* 世界ランキング表示エリア（華麗にヒラメいた！仕様: 各自ベスト3まで掲載＆自分のスコア削除機能） */}
+            <div className="final-world-rankings-box">
+              <div className="world-rankings-header">
+                <div className="rankings-header-left">
+                  <h4 className="world-rankings-title">🏆 世界ランキング (最新TOP 20)</h4>
+                  <span className="rankings-subtitle-note">
+                    ※ 1ユーザーあたりハイスコア上位3件までがランキングに掲載されます
+                  </span>
+                </div>
+                <div className="rankings-header-actions">
+                  <span className={`sync-status-indicator ${isOnline ? 'online' : 'local'}`}>
+                    {isOnline ? '☁️ リアルタイム同期中' : '📁 ローカルデータ'}
+                  </span>
+                  <button
+                    type="button"
+                    className="refresh-rankings-btn"
+                    onClick={loadRankings}
+                    disabled={isLoadingRankings}
+                    title="ランキングを最新化"
+                  >
+                    {isLoadingRankings ? '更新中...' : '🔄 最新化'}
+                  </button>
                 </div>
               </div>
-            )}
+
+              {topRankings.length === 0 ? (
+                <div className="no-rankings-placeholder">
+                  {isLoadingRankings ? 'ランキングを読み込み中...' : 'まだ登録スコアがありません'}
+                </div>
+              ) : (
+                <div className="rankings-table-wrapper">
+                  <table className="final-rankings-table">
+                    <thead>
+                      <tr>
+                        <th>順位</th>
+                        <th>プレイヤー名</th>
+                        <th>合計スコア</th>
+                        <th>平均誤差</th>
+                        <th>回答時間</th>
+                        <th>日時</th>
+                        <th>操作</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {topRankings.map((r, i) => {
+                        const rankNum = r.rank || i + 1;
+                        const isMyScore = Boolean(
+                          r.playerId && r.playerId === playerUniqueId
+                        );
+
+                        return (
+                          <tr
+                            key={r.id || i}
+                            className={`ranking-row ${isMyScore ? 'my-score-row' : ''} rank-${rankNum}`}
+                          >
+                            <td className="rank-cell">
+                              {rankNum === 1 ? '🥇 1位' : rankNum === 2 ? '🥈 2位' : rankNum === 3 ? '🥉 3位' : `#${rankNum}`}
+                            </td>
+                            <td className="player-cell">
+                              <span className="player-name-text">{r.playerName}</span>
+                              {isMyScore && (
+                                <span className="my-score-badge" title="あなたのスコア">
+                                  👑 あなた
+                                </span>
+                              )}
+                            </td>
+                            <td className="score-cell">
+                              <strong>{r.totalScore.toLocaleString()}</strong> 点
+                            </td>
+                            <td className="distance-cell">
+                              {r.totalDistanceKm.toFixed(1)} km
+                            </td>
+                            <td className="time-cell">
+                              {r.avgTimeFormatted || '--'}
+                            </td>
+                            <td className="date-cell">
+                              {r.playedAt ? new Date(r.playedAt).toLocaleDateString('ja-JP', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }) : ''}
+                            </td>
+                            <td className="action-cell">
+                              {isMyScore ? (
+                                <button
+                                  type="button"
+                                  className="delete-my-score-btn"
+                                  onClick={() => handleDeleteMyScore(r.id, r.totalScore)}
+                                  disabled={isDeletingScoreId === r.id}
+                                  title="このスコアを世界ランキングから削除する"
+                                >
+                                  {isDeletingScoreId === r.id ? '削除中...' : '🗑️ 削除'}
+                                </button>
+                              ) : (
+                                <span className="no-action-label">-</span>
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
           </div>
         </section>
 

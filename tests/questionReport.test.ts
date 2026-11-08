@@ -8,11 +8,13 @@ import {
 } from '../src/storage/reportStorage';
 import { getStoredQuestions } from '../src/storage/questionStorage';
 import { matchQuestion, SPORT_KINDS, AdvancedFilterState, INITIAL_FILTER_STATE } from '../src/utils/questionFilter';
+import { setRankingApiUrl } from '../src/services/rankingService';
 import { Question } from '../src/types/game';
 
 describe('問題修正報告 & 種類区分 (QuestionReport & SportKind)', () => {
   beforeEach(() => {
     localStorage.clear();
+    setRankingApiUrl('');
   });
 
   describe('種類区分 (SPORT_KINDS)', () => {

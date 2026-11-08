@@ -16,6 +16,7 @@ import { QuestionImportExport } from './QuestionImportExport';
 import { GameSettingsEditor } from './GameSettingsEditor';
 import { QuestionReportsManager } from './QuestionReportsManager';
 import { AiQuestionGenerator } from './AiQuestionGenerator';
+import { AdminRankingsManager } from './AdminRankingsManager';
 import { getStoredReports } from '../storage/reportStorage';
 
 interface AdminQuestionsPageProps {
@@ -27,7 +28,7 @@ export const AdminQuestionsPage: React.FC<AdminQuestionsPageProps> = ({
   onBackToGame,
   isStandalone = false,
 }) => {
-  const [activeTab, setActiveTab] = useState<'questions' | 'settings' | 'reports' | 'ai-generator'>('questions');
+  const [activeTab, setActiveTab] = useState<'questions' | 'settings' | 'reports' | 'ai-generator' | 'rankings'>('questions');
   const [questions, setQuestions] = useState<Question[]>(() => getStoredQuestions());
   const categories: Category[] = categoriesData;
   const pendingReportsCount = getStoredReports().filter((r) => r.status === 'pending').length;
@@ -210,6 +211,15 @@ export const AdminQuestionsPage: React.FC<AdminQuestionsPageProps> = ({
           <button
             type="button"
             role="tab"
+            aria-selected={activeTab === 'rankings'}
+            className={`admin-tab-nav-btn ${activeTab === 'rankings' ? 'active' : ''}`}
+            onClick={() => setActiveTab('rankings')}
+          >
+            🏆 世界ランキング管理
+          </button>
+          <button
+            type="button"
+            role="tab"
             aria-selected={activeTab === 'settings'}
             className={`admin-tab-nav-btn ${activeTab === 'settings' ? 'active' : ''}`}
             onClick={() => setActiveTab('settings')}
@@ -261,6 +271,12 @@ export const AdminQuestionsPage: React.FC<AdminQuestionsPageProps> = ({
         {activeTab === 'reports' && (
           <section className="admin-section reports-section">
             <QuestionReportsManager />
+          </section>
+        )}
+
+        {activeTab === 'rankings' && (
+          <section className="admin-section rankings-section">
+            <AdminRankingsManager />
           </section>
         )}
 
