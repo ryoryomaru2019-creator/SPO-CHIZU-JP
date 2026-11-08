@@ -86,6 +86,31 @@ export const AdminQuestionsPage: React.FC<AdminQuestionsPageProps> = ({
     setQuestions(updated);
   };
 
+  // インライン問題直接更新
+  const handleUpdateSingleQuestion = (updatedQuestion: Question) => {
+    const updated = updateQuestion(updatedQuestion);
+    setQuestions(updated);
+  };
+
+  // 一括公開/非公開
+  const handleBatchUpdatePublish = (ids: string[], isPublished: boolean) => {
+    const current = getStoredQuestions();
+    const today = new Date().toISOString().split('T')[0];
+    const idSet = new Set(ids);
+    const updated = current.map((q) =>
+      idSet.has(q.id) ? { ...q, isPublished, updatedAt: today } : q
+    );
+    setQuestions(updated);
+  };
+
+  // 一括削除
+  const handleBatchDelete = (ids: string[]) => {
+    const current = getStoredQuestions();
+    const idSet = new Set(ids);
+    const updated = current.filter((q) => !idSet.has(q.id));
+    setQuestions(updated);
+  };
+
   // 公開トグル
   const handleTogglePublish = (id: string) => {
     const updated = togglePublishStatus(id);
@@ -216,6 +241,9 @@ export const AdminQuestionsPage: React.FC<AdminQuestionsPageProps> = ({
                 onDuplicate={handleDuplicate}
                 onDelete={handleDelete}
                 onTogglePublish={handleTogglePublish}
+                onUpdateQuestion={handleUpdateSingleQuestion}
+                onBatchUpdatePublish={handleBatchUpdatePublish}
+                onBatchDelete={handleBatchDelete}
               />
             </section>
           </>
