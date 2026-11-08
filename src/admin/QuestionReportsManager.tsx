@@ -614,6 +614,21 @@ export const QuestionReportsManager: React.FC = () => {
                 />
               </div>
 
+              {/* 編集中のGoogleマップ確認リンク */}
+              {!isNaN(parseFloat(editLat)) && !isNaN(parseFloat(editLng)) && (
+                <div className="form-field full-width" style={{ marginTop: '-4px' }}>
+                  <a
+                    href={safeCreateGoogleMapSearchUrl(parseFloat(editLat), parseFloat(editLng)) || '#'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="clickable-map-link"
+                    style={{ fontSize: '0.85rem' }}
+                  >
+                    🗺️ 入力中の座標をGoogleマップで確認（新規ウィンドウ）
+                  </a>
+                </div>
+              )}
+
               {/* 参考URL */}
               <div className="form-field full-width">
                 <label htmlFor="edit-rep-url" className="form-label">

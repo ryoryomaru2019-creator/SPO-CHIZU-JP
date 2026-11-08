@@ -6,6 +6,45 @@ import { submitQuestionReport } from '../storage/reportStorage';
 import { isValidCoordinates, parseCoordinatesString } from '../utils/coordinates';
 import { safeCreateGoogleMapSearchUrl } from '../utils/googleMapsUrls';
 
+// カスタムSVGピンアイコン作成
+const createCustomPinIcon = (color1: string, color2: string, glowColor: string, iconSymbol: string, borderColor = '#FFFFFF') => {
+  return L.divIcon({
+    className: 'custom-map-pin',
+    html: `
+      <div style="
+        position: relative;
+        width: 32px;
+        height: 42px;
+        transform: translate(-16px, -42px);
+        filter: drop-shadow(0 3px 6px rgba(0,0,0,0.5)) drop-shadow(0 0 10px ${glowColor});
+        cursor: pointer;
+      ">
+        <svg viewBox="0 0 32 42" width="32" height="42" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="pinGrad-${color1.replace('#','')}" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="${color1}" />
+              <stop offset="100%" stop-color="${color2}" />
+            </linearGradient>
+          </defs>
+          <path d="M16 41C16 41 30 25 30 15C30 7.268 23.732 1 16 1C8.268 1 2 7.268 2 15C2 25 16 41 16 41Z"
+                fill="url(#pinGrad-${color1.replace('#','')})"
+                stroke="${borderColor}"
+                stroke-width="2" />
+          <circle cx="16" cy="15" r="7.5" fill="#FFFFFF" fill-opacity="0.95" />
+          <text x="16" y="19" text-anchor="middle" font-size="11" font-weight="900" fill="#000">${iconSymbol}</text>
+        </svg>
+      </div>
+    `,
+    iconSize: [32, 42],
+    iconAnchor: [16, 42],
+    popupAnchor: [0, -40],
+  });
+};
+
+const goldMarkerIcon = createCustomPinIcon('#FFF7B2', '#D4AF37', 'rgba(255, 215, 0, 0.95)', '★', '#FFE066');
+const userMarkerIcon = createCustomPinIcon('#67E8F9', '#0284C7', 'rgba(0, 229, 255, 0.8)', '📍');
+const correctMarkerIcon = createCustomPinIcon('#FDA4AF', '#E11D48', 'rgba(244, 63, 94, 0.8)', '🏟️');
+
 interface ReportQuestionModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -60,6 +99,7 @@ export const ReportQuestionModal: React.FC<ReportQuestionModalProps> = ({
       setLngInput(parsed.longitude.toFixed(6));
       setPasteRawInput(`${parsed.latitude.toFixed(6)}, ${parsed.longitude.toFixed(6)}`);
       setPasteNotice(`✅ Googleマップの座標を自動入力しました: (${parsed.latitude.toFixed(6)}, ${parsed.longitude.toFixed(6)})`);
+      setShowMapPicker(true); // 自動で地図を展開してゴールドピンを表示
       setTimeout(() => setPasteNotice(null), 4000);
       return true;
     }
@@ -113,7 +153,9 @@ export const ReportQuestionModal: React.FC<ReportQuestionModalProps> = ({
     if (userCoordinates) {
       setLatInput(userCoordinates.latitude.toFixed(6));
       setLngInput(userCoordinates.longitude.toFixed(6));
+      setPasteRawInput(`${userCoordinates.latitude.toFixed(6)}, ${userCoordinates.longitude.toFixed(6)}`);
       setPasteNotice('📍 あなたの回答地点の座標を反映しました');
+      setShowMapPicker(true);
       setTimeout(() => setPasteNotice(null), 3000);
     }
   };
@@ -122,7 +164,9 @@ export const ReportQuestionModal: React.FC<ReportQuestionModalProps> = ({
   const handleApplyOriginalCoords = () => {
     setLatInput(originalCoordinates.latitude.toFixed(6));
     setLngInput(originalCoordinates.longitude.toFixed(6));
+    setPasteRawInput(`${originalCoordinates.latitude.toFixed(6)}, ${originalCoordinates.longitude.toFixed(6)}`);
     setPasteNotice('🏟️ 現在の正解地点の座標を反映しました');
+    setShowMapPicker(true);
     setTimeout(() => setPasteNotice(null), 3000);
   };
 
@@ -148,10 +192,11 @@ export const ReportQuestionModal: React.FC<ReportQuestionModalProps> = ({
         maxZoom: 19,
       }).addTo(map);
 
-      // 1. 回答地点ピン（青）
+      // 1. 回答地点ピン（青・シアン）
       if (userCoordinates) {
         const uGmap = safeCreateGoogleMapSearchUrl(userCoordinates.latitude, userCoordinates.longitude);
         const userMarker = L.marker([userCoordinates.latitude, userCoordinates.longitude], {
+          icon: userMarkerIcon,
           title: 'あなたの回答地点',
         }).addTo(map);
         userMarker.bindPopup(`
@@ -163,9 +208,10 @@ export const ReportQuestionModal: React.FC<ReportQuestionModalProps> = ({
         `);
       }
 
-      // 2. 正解地点ピン（赤）
+      // 2. 正解地点ピン（赤・マゼンタ）
       const cGmap = safeCreateGoogleMapSearchUrl(originalCoordinates.latitude, originalCoordinates.longitude);
       const correctMarker = L.marker([originalCoordinates.latitude, originalCoordinates.longitude], {
+        icon: correctMarkerIcon,
         title: originalName || '正解地点',
       }).addTo(map);
       correctMarker.bindPopup(`
@@ -176,15 +222,16 @@ export const ReportQuestionModal: React.FC<ReportQuestionModalProps> = ({
         </div>
       `);
 
-      // 3. 修正提案ピン（初期値）
+      // 3. 修正提案ピン（ゴールドピン）
       if (isCoordsValid) {
         const rGmap = safeCreateGoogleMapSearchUrl(latNum, lngNum);
         reportMarkerRef.current = L.marker([latNum, lngNum], {
-          title: '修正提案地点',
+          icon: goldMarkerIcon,
+          title: '修正提案地点（ゴールドピン）',
         }).addTo(map);
         reportMarkerRef.current.bindPopup(`
-          <div class="marker-popup-bubble">
-            <div class="marker-popup-header">⚠️ 修正提案地点</div>
+          <div class="marker-popup-bubble gold-bubble">
+            <div class="marker-popup-header">🌟 修正提案地点 (ゴールドピン)</div>
             <div class="marker-popup-coords">北緯 ${latNum.toFixed(6)}°, 東経 ${lngNum.toFixed(6)}°</div>
             ${rGmap ? `<a href="${rGmap}" target="_blank" rel="noopener noreferrer" class="marker-popup-gmap-btn report-btn">🗺️ Googleマップで確認</a>` : ''}
           </div>
@@ -203,8 +250,8 @@ export const ReportQuestionModal: React.FC<ReportQuestionModalProps> = ({
 
         const rGmap = safeCreateGoogleMapSearchUrl(clickedLat, clickedLng);
         const popupContent = `
-          <div class="marker-popup-bubble">
-            <div class="marker-popup-header">⚠️ 修正提案地点</div>
+          <div class="marker-popup-bubble gold-bubble">
+            <div class="marker-popup-header">🌟 修正提案地点 (ゴールドピン)</div>
             <div class="marker-popup-coords">北緯 ${clickedLat.toFixed(6)}°, 東経 ${clickedLng.toFixed(6)}°</div>
             ${rGmap ? `<a href="${rGmap}" target="_blank" rel="noopener noreferrer" class="marker-popup-gmap-btn report-btn">🗺️ Googleマップで確認</a>` : ''}
           </div>
@@ -212,11 +259,13 @@ export const ReportQuestionModal: React.FC<ReportQuestionModalProps> = ({
 
         if (reportMarkerRef.current) {
           reportMarkerRef.current.setLatLng([clickedLat, clickedLng]);
+          reportMarkerRef.current.setIcon(goldMarkerIcon);
           reportMarkerRef.current.setPopupContent(popupContent);
           reportMarkerRef.current.openPopup();
         } else {
           reportMarkerRef.current = L.marker([clickedLat, clickedLng], {
-            title: '修正提案地点',
+            icon: goldMarkerIcon,
+            title: '修正提案地点（ゴールドピン）',
           }).addTo(map);
           reportMarkerRef.current.bindPopup(popupContent).openPopup();
         }
@@ -230,6 +279,35 @@ export const ReportQuestionModal: React.FC<ReportQuestionModalProps> = ({
       }, 100);
     }
   }, [showMapPicker]);
+
+  // 入力された座標（latInput, lngInput）の変更をゴールドピンにリアルタイム反映
+  useEffect(() => {
+    if (!mapInstanceRef.current || !isCoordsValid) return;
+
+    const rGmap = safeCreateGoogleMapSearchUrl(latNum, lngNum);
+    const popupContent = `
+      <div class="marker-popup-bubble gold-bubble">
+        <div class="marker-popup-header">🌟 修正提案地点 (ゴールドピン)</div>
+        <div class="marker-popup-coords">北緯 ${latNum.toFixed(6)}°, 東経 ${lngNum.toFixed(6)}°</div>
+        ${rGmap ? `<a href="${rGmap}" target="_blank" rel="noopener noreferrer" class="marker-popup-gmap-btn report-btn">🗺️ Googleマップで確認</a>` : ''}
+      </div>
+    `;
+
+    if (reportMarkerRef.current) {
+      reportMarkerRef.current.setLatLng([latNum, lngNum]);
+      reportMarkerRef.current.setIcon(goldMarkerIcon);
+      reportMarkerRef.current.setPopupContent(popupContent);
+    } else {
+      reportMarkerRef.current = L.marker([latNum, lngNum], {
+        icon: goldMarkerIcon,
+        title: '修正提案地点（ゴールドピン）',
+      }).addTo(mapInstanceRef.current);
+      reportMarkerRef.current.bindPopup(popupContent);
+    }
+
+    // 地図の中心をゴールドピンへスムーズ移動
+    mapInstanceRef.current.panTo([latNum, lngNum]);
+  }, [latNum, lngNum, isCoordsValid, showMapPicker]);
 
   // モーダルが閉じた時の破棄処理
   useEffect(() => {
@@ -404,11 +482,11 @@ export const ReportQuestionModal: React.FC<ReportQuestionModalProps> = ({
                 <div className="report-map-picker-wrapper">
                   <div className="picker-guide-bar">
                     <span className="guide-dot">●</span>
-                    <span>地図上の任意の位置をクリック/タップすると、修正地点（⚠️）が自動入力されます。</span>
+                    <span>地図上のタップ、または座標入力（コピペ）で、ゴールドピン（🌟）の位置が自動更新されます。</span>
                     <span className="guide-pin-legend">
                       <span className="leg-item user-leg">📍 回答地点</span>
                       <span className="leg-item correct-leg">🏟️ 正解地点</span>
-                      <span className="leg-item report-leg">⚠️ 修正地点</span>
+                      <span className="leg-item report-leg gold-leg">🌟 修正提案地点 (ゴールド)</span>
                     </span>
                   </div>
                   <div ref={mapContainerRef} className="report-picker-map-canvas" style={{ width: '100%', height: '240px' }} />

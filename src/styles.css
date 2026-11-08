@@ -6844,15 +6844,21 @@ html, body {
   color: #ffffff !important;
 }
 
+.marker-popup-bubble.gold-bubble .marker-popup-header {
+  color: #FFD700;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+}
+
 .marker-popup-gmap-btn.report-btn {
-  background: rgba(255, 228, 92, 0.2);
-  border-color: var(--neo-yellow);
-  color: var(--neo-yellow) !important;
+  background: rgba(255, 215, 0, 0.22);
+  border-color: #FFD700;
+  color: #FFE680 !important;
 }
 
 .marker-popup-gmap-btn.report-btn:hover {
-  background: var(--neo-yellow);
+  background: #FFD700;
   color: #070B17 !important;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.7);
 }
 
 /* ==========================================================
@@ -6969,8 +6975,11 @@ html, body {
   color: var(--neo-red);
 }
 
-.leg-item.report-leg {
-  color: var(--neo-yellow);
+.leg-item.report-leg,
+.leg-item.gold-leg {
+  color: #FFD700;
+  text-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+  font-weight: 800;
 }
 
 /* ユーザー修正報告・管理強化スタイル */
