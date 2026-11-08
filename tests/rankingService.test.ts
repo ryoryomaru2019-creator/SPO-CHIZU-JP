@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import {
+  DEFAULT_GAS_API_URL,
   getRankingApiUrl,
   setRankingApiUrl,
   getLastPlayerName,
@@ -15,8 +16,8 @@ describe('世界ランキング サービス (rankingService)', () => {
     vi.restoreAllMocks();
   });
 
-  it('API URLの保存と取得ができること', () => {
-    expect(getRankingApiUrl()).toBe('');
+  it('API URLの保存と取得ができること（初期値はデフォルトGAS URL）', () => {
+    expect(getRankingApiUrl()).toBe(DEFAULT_GAS_API_URL);
     setRankingApiUrl('https://script.google.com/macros/s/test/exec');
     expect(getRankingApiUrl()).toBe('https://script.google.com/macros/s/test/exec');
   });
@@ -36,6 +37,7 @@ describe('世界ランキング サービス (rankingService)', () => {
   });
 
   it('API未設定時はローカルフォールバックでランキング取得されること', async () => {
+    setRankingApiUrl('');
     const res = await fetchRankings();
     expect(res.isOnline).toBe(false);
     expect(Array.isArray(res.rankings)).toBe(true);
@@ -43,6 +45,7 @@ describe('世界ランキング サービス (rankingService)', () => {
   });
 
   it('API未設定時のスコア送信はローカル保存として成功すること', async () => {
+    setRankingApiUrl('');
     const res = await submitScore({
       playerName: 'テスト選手',
       totalScore: 5000,

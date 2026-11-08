@@ -15,6 +15,9 @@ export interface RankingEntry {
   playedAt: string;
 }
 
+export const DEFAULT_GAS_API_URL =
+  'https://script.google.com/macros/s/AKfycbyTsb8bURe9cp-xl4rrPuoan1K4HpQzGIRjKxopUnuwEJjskK8STrVGj0GmWZuHbaA/exec';
+
 const STORAGE_KEYS = {
   API_URL: 'sakachizu_ranking_api_url',
   PLAYER_NAME: 'sakachizu_player_name',
@@ -22,18 +25,18 @@ const STORAGE_KEYS = {
 };
 
 /**
- * 設定されたGAS Web App URLを取得
+ * 設定されたGAS Web App URLを取得（未設定時はデフォルトのデプロイURLを使用）
  */
 export function getRankingApiUrl(): string {
   try {
     const custom = localStorage.getItem(STORAGE_KEYS.API_URL);
-    if (custom && custom.trim().startsWith('http')) {
+    if (custom !== null) {
       return custom.trim();
     }
   } catch (e) {
     console.warn('[RankingService] Failed to read API URL from storage', e);
   }
-  return '';
+  return DEFAULT_GAS_API_URL;
 }
 
 /**
