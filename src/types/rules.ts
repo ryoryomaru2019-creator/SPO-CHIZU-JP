@@ -14,6 +14,12 @@ export interface GameRules {
   allowZoom: boolean; // 地図のズームを許可 (false = No Zoom)
   allowHints: boolean; // ヒントの表示を許可 (false = ヒント禁止)
   difficultyMultiplier: boolean; // 難易度ボーナス倍率 (初級1.0x / 中級1.2x / 上級1.5x)
+
+  // スコアカードCyber演出設定
+  scoreCardPulseSpeed: number; // 点滅速度秒 (デフォルト: 2.0)
+  scoreCardBorderColor: string; // 枠線色 (デフォルト: '#35F28A')
+  highScoreThreshold: number; // ハイスコア背景発光の条件スコア (デフォルト: 4000)
+  highScoreBgColor: string; // ハイスコア時の背景色 (デフォルト: 'rgba(53, 242, 138, 0.18)')
 }
 
 export const DEFAULT_GAME_RULES: GameRules = {
@@ -29,4 +35,10 @@ export const DEFAULT_GAME_RULES: GameRules = {
   allowZoom: true,
   allowHints: true,
   difficultyMultiplier: false,
+
+  // スコアカードCyber演出設定デフォルト
+  scoreCardPulseSpeed: 2.0,
+  scoreCardBorderColor: '#35F28A',
+  highScoreThreshold: 4000,
+  highScoreBgColor: 'rgba(53, 242, 138, 0.18)',
 };

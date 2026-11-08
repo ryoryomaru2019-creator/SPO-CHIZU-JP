@@ -266,7 +266,123 @@ export const GameSettingsEditor: React.FC = () => {
           </div>
         </div>
 
-        {/* セクション 4: Googleスプレッドシート 世界ランキング連携 (GAS) */}
+        {/* セクション 4: スコアカード Cyber演出・点滅エフェクト設定 */}
+        <div className="settings-section-card score-pulse-setting-card">
+          <div className="settings-card-title">
+            <span className="card-icon">⚡</span>
+            <h3>スコア表示 Cyber Pulse 枠線点滅 ＆ ハイスコア演出設定</h3>
+          </div>
+          <p className="section-intro">
+            結果画面のスコア＆誤差カードのCyber緑枠線点滅や、ハイスコア達成時の背景点滅エフェクトを自由にカスタマイズできます。
+          </p>
+
+          <div className="settings-grid">
+            <div className="form-group">
+              <label htmlFor="highScoreThreshold">
+                背景発光のハイスコア条件 (点)
+                <span className="field-hint">（この点数以上を獲得したラウンドで背景が発光）</span>
+              </label>
+              <input
+                id="highScoreThreshold"
+                type="number"
+                min="0"
+                max="6000"
+                step="100"
+                value={rules.highScoreThreshold ?? 4000}
+                onChange={(e) => handleChange('highScoreThreshold', Number(e.target.value))}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="scoreCardPulseSpeed">
+                点滅スピード (秒)
+                <span className="field-hint">（1周期の秒数。小さいほど高速点滅）</span>
+              </label>
+              <div className="range-input-group">
+                <input
+                  id="scoreCardPulseSpeed"
+                  type="range"
+                  min="0.5"
+                  max="4.0"
+                  step="0.1"
+                  value={rules.scoreCardPulseSpeed ?? 2.0}
+                  onChange={(e) => handleChange('scoreCardPulseSpeed', parseFloat(e.target.value))}
+                />
+                <span className="range-val-badge">{(rules.scoreCardPulseSpeed ?? 2.0).toFixed(1)} 秒</span>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="scoreCardBorderColor">
+                枠線の発光カラー
+                <span className="field-hint">（Cyber緑系などのお好みのネオン色）</span>
+              </label>
+              <div className="color-picker-row">
+                <input
+                  id="scoreCardBorderColor"
+                  type="color"
+                  className="color-picker-input"
+                  value={rules.scoreCardBorderColor || '#35F28A'}
+                  onChange={(e) => handleChange('scoreCardBorderColor', e.target.value)}
+                />
+                <input
+                  type="text"
+                  className="color-code-input"
+                  value={rules.scoreCardBorderColor || '#35F28A'}
+                  onChange={(e) => handleChange('scoreCardBorderColor', e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="highScoreBgColor">
+                ハイスコア達成時の背景発光色
+                <span className="field-hint">（半透明カラー推奨）</span>
+              </label>
+              <div className="color-picker-row">
+                <input
+                  type="color"
+                  className="color-picker-input"
+                  value={rules.highScoreBgColor?.startsWith('#') ? rules.highScoreBgColor : '#1a4030'}
+                  onChange={(e) => handleChange('highScoreBgColor', e.target.value)}
+                />
+                <input
+                  id="highScoreBgColor"
+                  type="text"
+                  className="color-code-input"
+                  value={rules.highScoreBgColor || 'rgba(53, 242, 138, 0.18)'}
+                  onChange={(e) => handleChange('highScoreBgColor', e.target.value)}
+                  placeholder="rgba(53, 242, 138, 0.18)"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* リアルタイム演出プレビューカード */}
+          <div className="pulse-preview-container">
+            <span className="preview-heading">👀 リアルタイム演出プレビュー:</span>
+            <div
+              className="geoguessr-round-summary-card cyber-pulse-card is-high-score preview-card-box"
+              style={{
+                ['--pulse-speed' as any]: `${rules.scoreCardPulseSpeed ?? 2.0}s`,
+                ['--pulse-border-color' as any]: rules.scoreCardBorderColor || '#35F28A',
+                ['--high-score-bg' as any]: rules.highScoreBgColor || 'rgba(53, 242, 138, 0.18)',
+              }}
+            >
+              <div className="summary-col distance-col">
+                <span className="summary-val">0.3km</span>
+                <span className="summary-label">正解地点からの誤差</span>
+              </div>
+              <div className="summary-col score-col">
+                <span className="summary-val highlight">{rules.highScoreThreshold ?? 4000} 点</span>
+                <span className="summary-label">獲得ポイント (ハイスコア)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* セクション 5: Googleスプレッドシート 世界ランキング連携 (GAS) */}
         <div className="settings-section-card gas-ranking-card">
           <div className="settings-card-title">
             <span className="card-icon">🏆</span>

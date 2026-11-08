@@ -15,6 +15,7 @@ import { QuestionEditor } from './QuestionEditor';
 import { QuestionImportExport } from './QuestionImportExport';
 import { GameSettingsEditor } from './GameSettingsEditor';
 import { QuestionReportsManager } from './QuestionReportsManager';
+import { AiQuestionGenerator } from './AiQuestionGenerator';
 import { getStoredReports } from '../storage/reportStorage';
 
 interface AdminQuestionsPageProps {
@@ -26,10 +27,15 @@ export const AdminQuestionsPage: React.FC<AdminQuestionsPageProps> = ({
   onBackToGame,
   isStandalone = false,
 }) => {
-  const [activeTab, setActiveTab] = useState<'questions' | 'settings' | 'reports'>('questions');
+  const [activeTab, setActiveTab] = useState<'questions' | 'settings' | 'reports' | 'ai-generator'>('questions');
   const [questions, setQuestions] = useState<Question[]>(() => getStoredQuestions());
   const categories: Category[] = categoriesData;
   const pendingReportsCount = getStoredReports().filter((r) => r.status === 'pending').length;
+
+  // 問題データ再読み込み
+  const handleRefreshQuestions = () => {
+    setQuestions(getStoredQuestions());
+  };
 
   const [filter, setFilter] = useState<QuestionFilter>({
     searchQuery: '',
@@ -161,6 +167,15 @@ export const AdminQuestionsPage: React.FC<AdminQuestionsPageProps> = ({
           <button
             type="button"
             role="tab"
+            aria-selected={activeTab === 'ai-generator'}
+            className={`admin-tab-nav-btn ai-tab-btn ${activeTab === 'ai-generator' ? 'active' : ''}`}
+            onClick={() => setActiveTab('ai-generator')}
+          >
+            🤖 AI自動問題作成 (Gemini)
+          </button>
+          <button
+            type="button"
+            role="tab"
             aria-selected={activeTab === 'reports'}
             className={`admin-tab-nav-btn ${activeTab === 'reports' ? 'active' : ''}`}
             onClick={() => setActiveTab('reports')}
@@ -204,6 +219,15 @@ export const AdminQuestionsPage: React.FC<AdminQuestionsPageProps> = ({
               />
             </section>
           </>
+        )}
+
+        {activeTab === 'ai-generator' && (
+          <section className="admin-section ai-generator-section">
+            <AiQuestionGenerator
+              categories={categories}
+              onQuestionAdded={handleRefreshQuestions}
+            />
+          </section>
         )}
 
         {activeTab === 'reports' && (

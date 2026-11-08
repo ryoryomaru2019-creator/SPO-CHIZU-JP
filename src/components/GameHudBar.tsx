@@ -180,7 +180,7 @@ export const GameHudBar: React.FC<GameHudBarProps> = ({
             aria-label="HUDバーを折りたたむ"
           >
             <span className="btn-icon" aria-hidden="true">▲</span>
-            <span className="hud-toggle-text">隠す</span>
+            <span className="hud-toggle-text">HUD閉じる</span>
           </button>
         )}
       </div>

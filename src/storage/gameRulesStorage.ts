@@ -39,6 +39,23 @@ export function getGameRules(): GameRules {
       allowZoom: parsed.allowZoom !== false,
       allowHints: parsed.allowHints !== false,
       difficultyMultiplier: Boolean(parsed.difficultyMultiplier),
+
+      scoreCardPulseSpeed:
+        typeof parsed.scoreCardPulseSpeed === 'number' && parsed.scoreCardPulseSpeed > 0
+          ? parsed.scoreCardPulseSpeed
+          : DEFAULT_GAME_RULES.scoreCardPulseSpeed,
+      scoreCardBorderColor:
+        typeof parsed.scoreCardBorderColor === 'string' && parsed.scoreCardBorderColor.trim()
+          ? parsed.scoreCardBorderColor
+          : DEFAULT_GAME_RULES.scoreCardBorderColor,
+      highScoreThreshold:
+        typeof parsed.highScoreThreshold === 'number' && parsed.highScoreThreshold >= 0
+          ? parsed.highScoreThreshold
+          : DEFAULT_GAME_RULES.highScoreThreshold,
+      highScoreBgColor:
+        typeof parsed.highScoreBgColor === 'string' && parsed.highScoreBgColor.trim()
+          ? parsed.highScoreBgColor
+          : DEFAULT_GAME_RULES.highScoreBgColor,
     };
   } catch (e) {
     console.warn('ゲームルールの読み込みに失敗しました（デフォルトを使用）:', e);

@@ -379,9 +379,11 @@ export const GameMap: React.FC<GameMapProps> = ({
     }
   }, [isResultScreen, mapSettings.dimEnabled, userCoordinates, correctCoordinates]);
 
-  // 十字ターゲットを表示すべきか
+  // 十字ターゲットを表示すべきか（回答中のみ表示し、待機中・カウントダウン中は非表示）
   const isTargetVisible =
-    interactive && (mapSettings.pinMode === 'crosshair' || mapSettings.targetEnabled);
+    interactive &&
+    questionStage === 'answering' &&
+    (mapSettings.pinMode === 'crosshair' || mapSettings.targetEnabled);
 
   return (
     <div
@@ -538,10 +540,16 @@ export const GameMap: React.FC<GameMapProps> = ({
         <div className="map-standby-curtain" role="presentation" aria-hidden="true">
           <div className="curtain-content">
             <span className="curtain-lock-icon">🔒</span>
-            <span className="curtain-lock-title">第 {questionStage === 'standby' ? 'スタート待機中' : 'カウントダウン中'}</span>
+            {questionStage === 'standby' ? (
+              <div className="typewriter-ready-container">
+                <span className="typewriter-ready-text">Ready....</span>
+              </div>
+            ) : (
+              <span className="curtain-lock-title neon-pulse">SYSTEM INITIALIZING...</span>
+            )}
             <span className="curtain-lock-text">
               {questionStage === 'standby'
-                ? '「問題スタート！」を押すと出題され地図が開きます'
+                ? '左パネルの「問題スタート！」を押すと計測とスキャンが開始されます'
                 : 'まもなく出題されます...'}
             </span>
           </div>

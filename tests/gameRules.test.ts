@@ -33,6 +33,10 @@ describe('ゲームルール & パラメータ設定 (gameRulesStorage)', () => 
       allowZoom: false,
       allowHints: false,
       difficultyMultiplier: true,
+      scoreCardPulseSpeed: 3.0,
+      scoreCardBorderColor: '#00E5FF',
+      highScoreThreshold: 4500,
+      highScoreBgColor: '#00e5ff33',
     };
 
     saveGameRules(customRules);

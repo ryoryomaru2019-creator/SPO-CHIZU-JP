@@ -3,6 +3,7 @@ import { RoundResult } from '../types/game';
 import { formatDistance } from '../utils/distance';
 import { formatTimeDisplay } from '../utils/time';
 import { GoogleMapsLinks } from './GoogleMapsLinks';
+import { getGameRules } from '../storage/gameRulesStorage';
 
 interface ResultPanelProps {
   roundResult: RoundResult;
@@ -22,6 +23,15 @@ export const ResultPanel: React.FC<ResultPanelProps> = ({
   const formattedDistance = formatDistance(roundResult.distanceKm);
   const hasTime = typeof roundResult.elapsedMs === 'number';
   const hasBonus = typeof roundResult.timeBonus === 'number';
+
+  const rules = getGameRules();
+  const isHighScore = roundResult.score >= (rules.highScoreThreshold ?? 4000);
+
+  const customPulseStyle: React.CSSProperties = {
+    ['--pulse-speed' as any]: `${rules.scoreCardPulseSpeed || 2.0}s`,
+    ['--pulse-border-color' as any]: rules.scoreCardBorderColor || '#35F28A',
+    ['--high-score-bg' as any]: rules.highScoreBgColor || 'rgba(53, 242, 138, 0.18)',
+  };
 
   // GeoGuessr風のSpace / Enterキーでの「次へ」対応
   useEffect(() => {
@@ -55,8 +65,11 @@ export const ResultPanel: React.FC<ResultPanelProps> = ({
           <h2 className="stadium-name">{roundResult.stadiumName}</h2>
         </div>
 
-        {/* GeoGuessr風メインスコアカード */}
-        <div className="geoguessr-round-summary-card">
+        {/* GeoGuessr風メインスコアカード (Cyber Pulse Border & High Score演出) */}
+        <div
+          className={`geoguessr-round-summary-card cyber-pulse-card ${isHighScore ? 'is-high-score' : ''}`}
+          style={customPulseStyle}
+        >
           <div className="summary-col distance-col">
             <span className="summary-val">{formattedDistance}</span>
             <span className="summary-label">正解地点からの誤差</span>

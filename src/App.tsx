@@ -570,7 +570,7 @@ export const App: React.FC = () => {
                   aria-label="ヘッダーを折りたたむ"
                 >
                   <span className="btn-icon" aria-hidden="true">▲</span>
-                  <span className="action-btn-text">隠す</span>
+                  <span className="action-btn-text">ヘッダー閉じる</span>
                 </button>
               </nav>
             </div>

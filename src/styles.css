@@ -2390,21 +2390,24 @@ html, body {
 }
 
 /* ==========================================================
-   Start Screen Settings & Navigation
+   Start Screen Settings & Navigation (Cyberpunk Dark Panel)
    ========================================================== */
-.start-settings-panel {
-  background: #f8faf9;
-  border: 1px solid #e2ece6;
+.start-settings-panel,
+.start-settings-panel.neo-settings-panel {
+  background: rgba(11, 19, 36, 0.95);
+  border: 1px solid rgba(0, 229, 255, 0.35);
   border-radius: var(--radius-md);
-  padding: 18px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 18px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 229, 255, 0.04);
 }
 
 .settings-panel-title {
-  font-size: 1.05rem;
-  color: var(--color-primary-dark);
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #ffffff;
 }
 
 .settings-grid {
@@ -2422,7 +2425,7 @@ html, body {
 .selector-label {
   font-size: 0.85rem;
   font-weight: 700;
-  color: #334155;
+  color: #EAF2FF;
 }
 
 .form-select, .form-input, textarea.form-input {
@@ -3316,16 +3319,21 @@ html, body {
 
 .question-editor-modal input,
 .question-editor-modal textarea,
-.question-editor-modal select {
+.question-editor-modal select,
+.question-editor-modal .form-input,
+.question-editor-modal .form-select {
   background-color: #ffffff !important;
-  color: #0f172a !important;
-  font-weight: 500;
+  color: #050a14 !important;
+  -webkit-text-fill-color: #050a14 !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
 }
 
 .question-editor-modal input::placeholder,
 .question-editor-modal textarea::placeholder {
   color: #64748b !important;
-  opacity: 0.85;
+  -webkit-text-fill-color: #64748b !important;
+  opacity: 0.8 !important;
 }
 
 .paste-coords-section {
@@ -4604,6 +4612,44 @@ html, body {
   color: var(--geo-text-muted);
   font-weight: 600;
   margin-top: 2px;
+}
+
+/* ==========================================================
+   スコアカード Cyber Pulse 枠線点滅 ＆ ハイスコア背景演出
+   ========================================================== */
+.geoguessr-round-summary-card.cyber-pulse-card {
+  position: relative;
+  border: 1.5px solid var(--pulse-border-color, #35F28A);
+  border-radius: 8px;
+  animation: cyberBorderPulse var(--pulse-speed, 2s) infinite ease-in-out;
+  transition: all 0.3s ease;
+}
+
+@keyframes cyberBorderPulse {
+  0%, 100% {
+    border-color: rgba(53, 242, 138, 0.4);
+    box-shadow: 0 0 10px rgba(53, 242, 138, 0.2);
+  }
+  50% {
+    border-color: var(--pulse-border-color, #35F28A);
+    box-shadow: 0 0 22px var(--pulse-border-color, #35F28A), inset 0 0 14px rgba(53, 242, 138, 0.25);
+  }
+}
+
+/* ハイスコア達成時の背景点滅演出 */
+.geoguessr-round-summary-card.cyber-pulse-card.is-high-score {
+  animation:
+    cyberBorderPulse var(--pulse-speed, 2s) infinite ease-in-out,
+    highScoreBgPulse var(--pulse-speed, 2s) infinite ease-in-out;
+}
+
+@keyframes highScoreBgPulse {
+  0%, 100% {
+    background-color: rgba(12, 20, 38, 0.85);
+  }
+  50% {
+    background-color: var(--high-score-bg, rgba(53, 242, 138, 0.2));
+  }
 }
 
 .round-time-display-row {
@@ -7019,6 +7065,111 @@ html, body {
   font-size: 0.95rem;
 }
 
+/* ==========================================================
+   タイプライター風 Ready.... ループアニメーション
+   ========================================================== */
+.typewriter-ready-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.typewriter-ready-text {
+  display: inline-block;
+  font-family: 'Share Tech Mono', 'Orbitron', monospace;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: #00E5FF;
+  letter-spacing: 0.15em;
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.8), 0 0 24px rgba(0, 229, 255, 0.4);
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid #00E5FF;
+  animation:
+    readyTypeLoop 3.2s steps(8, end) infinite,
+    readyCursorBlink 0.75s step-end infinite;
+  max-width: 0;
+}
+
+@keyframes readyTypeLoop {
+  0% { max-width: 0; }
+  40% { max-width: 9em; }
+  85% { max-width: 9em; }
+  100% { max-width: 0; }
+}
+
+@keyframes readyCursorBlink {
+  from, to { border-color: transparent; }
+  50% { border-color: #00E5FF; }
+}
+
+/* ==========================================================
+   管理ツール: スコアパルス演出設定
+   ========================================================== */
+.range-input-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.range-val-badge {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #00E5FF;
+  min-width: 50px;
+}
+
+.color-picker-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.color-picker-input {
+  width: 44px;
+  height: 38px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 2px;
+  background: #ffffff;
+}
+
+.color-code-input {
+  flex: 1;
+  padding: 8px 12px;
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.9rem;
+}
+
+.pulse-preview-container {
+  margin-top: 18px;
+  padding: 16px;
+  background: #0c1426;
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: 8px;
+}
+
+.preview-heading {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #00E5FF;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.preview-card-box {
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+
 
 .report-picker-map-canvas {
   width: 100%;
@@ -7030,3 +7181,578 @@ html, body {
   font-size: 0.68rem;
   color: var(--neo-text-sub);
 }
+
+/* ==========================================================================
+   AI自動問題作成 (Gemini) スタイル
+   ========================================================================== */
+
+.admin-tab-nav-btn.ai-tab-btn {
+  border-color: rgba(0, 229, 255, 0.4);
+  background: linear-gradient(135deg, rgba(0, 229, 255, 0.08) 0%, rgba(13, 22, 41, 0.6) 100%);
+}
+
+.admin-tab-nav-btn.ai-tab-btn:hover {
+  border-color: #00E5FF;
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.3);
+}
+
+.ai-question-generator-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.ai-gen-top-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  background: rgba(11, 19, 36, 0.85);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.ai-api-key-panel {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ai-key-label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #00E5FF;
+  white-space: nowrap;
+}
+
+.ai-key-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ai-key-input {
+  width: 280px;
+  padding: 7px 12px;
+  background: #ffffff !important;
+  color: #050a14 !important;
+  -webkit-text-fill-color: #050a14 !important;
+  font-weight: 600;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.ai-toggle-show-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ai-toggle-show-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.ai-save-key-btn {
+  padding: 7px 14px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.ai-saved-notice {
+  font-size: 0.82rem;
+  color: #35F28A;
+  font-weight: 700;
+}
+
+.ai-data-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ai-backup-btn {
+  padding: 8px 14px;
+  font-size: 0.85rem;
+}
+
+.ai-download-btn {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #00E5FF 0%, #0088cc 100%);
+  color: #030712;
+}
+
+.ai-backup-toast {
+  padding: 10px 16px;
+  background: rgba(53, 242, 138, 0.15);
+  border: 1px solid #35F28A;
+  border-radius: 6px;
+  color: #35F28A;
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.ai-backups-accordion {
+  background: rgba(11, 19, 36, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 10px 14px;
+}
+
+.ai-backups-summary {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.ai-backups-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+.ai-backup-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+  font-size: 0.82rem;
+}
+
+.ai-backup-time {
+  color: #cbd5e1;
+}
+
+.ai-backup-count {
+  color: #00E5FF;
+  font-weight: 700;
+}
+
+.ai-error-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid #ef4444;
+  border-radius: 6px;
+  color: #fca5a5;
+  font-size: 0.88rem;
+}
+
+.quick-prompts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quick-prompts-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.quick-prompts-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.quick-chip-btn {
+  background: rgba(11, 19, 36, 0.7);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  color: #cbd5e1;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.quick-chip-btn:hover {
+  background: rgba(0, 229, 255, 0.15);
+  border-color: #00E5FF;
+  color: #00E5FF;
+}
+
+.ai-chat-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 250px;
+  max-height: 65vh;
+  overflow-y: auto;
+  padding: 16px;
+  background: rgba(6, 11, 24, 0.7);
+  border: 1px solid rgba(0, 229, 255, 0.15);
+  border-radius: var(--radius-md);
+}
+
+.ai-message-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.ai-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(11, 19, 36, 0.9);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.ai-message-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ai-message-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ai-sender-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #00E5FF;
+}
+
+.ai-message-row.user .ai-sender-name {
+  color: #35F28A;
+}
+
+.ai-timestamp {
+  font-size: 0.72rem;
+  color: #64748b;
+}
+
+.ai-message-text {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #e2e8f0;
+  white-space: pre-line;
+  background: rgba(11, 19, 36, 0.5);
+  padding: 10px 14px;
+  border-radius: 8px;
+  border-left: 3px solid rgba(0, 229, 255, 0.4);
+}
+
+.ai-message-row.user .ai-message-text {
+  border-left-color: #35F28A;
+  background: rgba(53, 242, 138, 0.05);
+}
+
+.ai-loading-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(0, 229, 255, 0.08);
+  border: 1px dashed #00E5FF;
+  border-radius: 8px;
+  color: #00E5FF;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.cyber-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(0, 229, 255, 0.3);
+  border-top-color: #00E5FF;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   生成された問題カードグリッド
+   ========================================================================== */
+
+.generated-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.gen-question-card {
+  background: rgba(11, 19, 36, 0.95);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  border-radius: 8px;
+  padding: 18px;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  transition: all 0.2s ease;
+}
+
+.gen-question-card:hover {
+  border-color: #00E5FF;
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.25);
+}
+
+.gen-question-card.is-added {
+  border-color: #35F28A;
+  background: rgba(6, 25, 20, 0.95);
+}
+
+.card-added-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #35F28A;
+  color: #030712;
+  font-weight: 800;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(53, 242, 138, 0.5);
+}
+
+.card-top-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.category-tag-badge {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.cyber-tag-chip {
+  font-size: 0.72rem;
+  color: #00E5FF;
+  background: rgba(0, 229, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  line-height: 1.4;
+}
+
+.card-question-text {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: #cbd5e1;
+  margin: 0 0 14px 0;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 8px 10px;
+  border-radius: 4px;
+}
+
+.card-venue-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.82rem;
+  background: rgba(0, 229, 255, 0.04);
+  padding: 8px 12px;
+  border-radius: 6px;
+  border-left: 3px solid #00E5FF;
+  margin-bottom: 10px;
+}
+
+.card-venue-info .label {
+  color: #94a3b8;
+  margin-right: 6px;
+}
+
+.card-venue-info .value {
+  color: #ffffff;
+}
+
+.coords-val {
+  font-family: 'Share Tech Mono', monospace;
+  color: #35F28A;
+  font-weight: 700;
+  margin-right: 8px;
+}
+
+.gmaps-link-btn {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: #00E5FF;
+  text-decoration: underline;
+  margin-left: 6px;
+}
+
+.gmaps-link-btn:hover {
+  color: #ffffff;
+}
+
+.card-hint-row, .card-evidence-row {
+  font-size: 0.8rem;
+  margin-bottom: 6px;
+  color: #cbd5e1;
+}
+
+.card-hint-row .label, .card-evidence-row .label {
+  color: #94a3b8;
+  margin-right: 6px;
+}
+
+.evidence-link {
+  color: #00E5FF;
+  word-break: break-all;
+  text-decoration: underline;
+}
+
+.card-ai-memo {
+  margin-top: 8px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+  font-size: 0.78rem;
+  color: #94a3b8;
+  line-height: 1.4;
+}
+
+.card-ai-memo .memo-title {
+  color: #e2e8f0;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.card-actions-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.add-to-game-btn {
+  background: linear-gradient(135deg, #35F28A 0%, #10b981 100%);
+  color: #030712;
+  font-weight: 800;
+  font-size: 0.85rem;
+  padding: 8px 14px;
+}
+
+.edit-card-btn, .delete-card-btn {
+  font-size: 0.82rem;
+  padding: 7px 12px;
+}
+
+/* 編集モード */
+.card-edit-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.edit-form-heading {
+  font-size: 0.92rem;
+  color: #00E5FF;
+  margin: 0 0 6px 0;
+  font-weight: 700;
+}
+
+.cyber-edit-input,
+.cyber-edit-textarea,
+.cyber-edit-select {
+  width: 100%;
+  padding: 7px 10px;
+  background: #ffffff !important;
+  color: #050a14 !important;
+  -webkit-text-fill-color: #050a14 !important;
+  font-weight: 600 !important;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  font-size: 0.85rem;
+}
+
+.form-row-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.edit-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+/* 入力エリア */
+.ai-chat-input-bar {
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+  background: rgba(11, 19, 36, 0.9);
+  border: 1px solid rgba(0, 229, 255, 0.3);
+  border-radius: var(--radius-md);
+}
+
+.ai-prompt-textarea {
+  flex: 1;
+  padding: 10px 14px;
+  background: #ffffff !important;
+  color: #050a14 !important;
+  -webkit-text-fill-color: #050a14 !important;
+  font-weight: 600 !important;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  resize: vertical;
+}
+
+.ai-prompt-textarea::placeholder {
+  color: #64748b !important;
+  -webkit-text-fill-color: #64748b !important;
+}
+
+.ai-send-btn {
+  padding: 0 20px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #00E5FF 0%, #0088cc 100%);
+  color: #030712;
+  white-space: nowrap;
+}
+
